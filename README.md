@@ -17,6 +17,16 @@ Once a confirmation has been sent out, user will have 24 hours to responds. Non-
 
 When all confirmations have completed, the class shows up on the users’s pages. Students can then submit reviews on the teachers whose classes they have attended.
 
+##Components
+- HOC's
+  - Pages, Class List/List
+- Containers
+  - Topic Browser
+  - Topic Page
+- Presentational
+  - Class Card
+  - Topic Card
+
 
 
 ## Wireframes
