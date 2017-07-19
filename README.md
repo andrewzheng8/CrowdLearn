@@ -19,13 +19,20 @@ When all confirmations have completed, the class shows up on the users’s pages
 
 ##Components
 - HOC's
-  - Pages, Class List/List
+  - Pages
+  - Card List
 - Containers
   - Topic Browser
   - Topic Page
+  - Polling Component
 - Presentational
   - Class Card
+  - Class Component
   - Topic Card
+  - Confirmation Card
+  - Sign Up
+  - Sign In
+  - User Page
 
 
 
