@@ -6,7 +6,7 @@ const User = require('./user')
 const courseSchema = new Schema({
   title: String,
   curriculum: String,
-  teacher: {type: Schema.Types.ObjectId, ref: 'user'}
+  _teacher: {type: Schema.Types.ObjectId, ref: 'user'}
 })
 
 // userSchema.methods.comparePassword = function (candidatePassword, callback) {

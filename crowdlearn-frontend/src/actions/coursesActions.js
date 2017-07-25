@@ -10,7 +10,6 @@ export const setCourses = () => {
     return axios.get(`${ROOT_URL}/courses`)
     .then(courses => dispatch({type: SET_COURSES, payload: courses.data}))
     .catch(err => console.log(err))
-    
   }
 }
 
@@ -21,7 +20,7 @@ export const addCourse = course => {
       .then(response => {
         // If request is good...
         // - Update state to show course added
-        console.log('from server on course creation', response)
+        //console.log('from server on course creation', response, course)
         dispatch({type: ADD_COURSE, payload: course})
       })
       .catch(() => {

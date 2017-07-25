@@ -8,23 +8,15 @@ import {bindActionCreators} from 'redux'
 class CourseForm extends Component {
   state = {
     title: '',
-    curriculum: ''
+    curriculum: '',
+    teacher: this.props.viewer
   }
 
-  // static contextTypes = {
-  //   router: PropTypes.object
-  // }
-  // componentWillUpdate(nextProps) {
-  //   console.log("updating signup", nextProps, this.context)
-  //   if (nextProps.authenticated) {
-  //     this.context.router.history.push('/courses')
-  //   }
-  // }
 
   handleFormSubmit = event => {
     event.preventDefault()
     console.log(this.props);
-    // Call action creator to sign up the user
+    // Call action creator to add course
     this.props.addCourse(this.state)
     this.setState({
       title: '',
@@ -66,6 +58,9 @@ class CourseForm extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {viewer: state.viewer}
+}
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
@@ -73,4 +68,4 @@ const mapDispatchToProps = dispatch => {
   }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(CourseForm)
+export default connect(mapStateToProps, mapDispatchToProps)(CourseForm)

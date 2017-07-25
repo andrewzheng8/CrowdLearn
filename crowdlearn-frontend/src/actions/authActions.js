@@ -3,7 +3,8 @@ import {
   AUTH_USER,
   UNAUTH_USER,
   AUTH_ERROR,
-  FETCH_MESSAGE
+  FETCH_MESSAGE,
+  SET_VIEWER
 } from './action_types'
 
 const ROOT_URL = 'http://localhost:3000/api/v1'
@@ -19,6 +20,8 @@ export function signinUser ({ email, password }) {
         dispatch({ type: AUTH_USER })
         // - Save the JWT token
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('userId', response.data.userId)
+        dispatch({type: SET_VIEWER, payload: response.data.userId})
       })
       .catch(() => {
         // If request is bad...
@@ -34,6 +37,8 @@ export function signupUser ({ email, password }) {
       .then(response => {
         dispatch({ type: AUTH_USER })
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('userId', response.data.userId)
+        dispatch({type: SET_VIEWER, payload: response.data.userId})
       })
       .catch(response => dispatch(authError(response.data.error)))
   }
@@ -48,6 +53,7 @@ export function authError (error) {
 
 export function signoutUser () {
   localStorage.removeItem('token')
+  localStorage.removeItem('userId')
   return { type: UNAUTH_USER }
 }
 

@@ -32,5 +32,4 @@ exports.fetchCourses = (req, res, next) => {
     console.log('GETTING COURSES FROM DATABASE !!! -0--- !!!', courses)
     res.json(courses)
   })
-
 }

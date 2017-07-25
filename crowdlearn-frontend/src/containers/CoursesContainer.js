@@ -10,7 +10,7 @@ import CreateCourseForm from '../components/CreateCourseForm'
 class CoursesContainer extends Component {
 
   componentWillMount () {
-    this.props.setCourses()// .then(resp => console.log(resp))
+    this.props.setCourses()
   }
 
   render () {
@@ -33,9 +33,7 @@ class CoursesContainer extends Component {
           <Grid.Column width={5}>
             <CreateCourseForm />
           </Grid.Column>
-          <Grid.Column width={11}>
-
-          </Grid.Column>
+          <Grid.Column width={11} />
         </Grid.Row>
 
       </Grid>

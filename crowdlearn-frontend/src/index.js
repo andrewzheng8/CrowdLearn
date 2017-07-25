@@ -10,7 +10,7 @@ import thunk from 'redux-thunk'
 import rootReducer from './reducers/index'
 import 'semantic-ui-css/semantic.min.css'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import {AUTH_USER} from './actions/action_types'
+import {AUTH_USER, SET_VIEWER} from './actions/action_types'
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk)
@@ -19,10 +19,17 @@ const store = createStore(rootReducer, composeWithDevTools(
 // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
 const token = localStorage.getItem('token')
+const userId = localStorage.getItem('userId')
 // If we have a token, consider the user to be signed in
+// If we have a userId saved, use it.
+// /may need to authenticate this token!!!!
 if (token) {
   // we need to update application state to authenticated=true
   store.dispatch({ type: AUTH_USER })
+}
+if (userId) {
+  // set the viewer in state to be the users id
+  store.dispatch({type: SET_VIEWER, payload: userId})
 }
 
 ReactDOM.render(
