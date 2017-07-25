@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Card, Image} from 'semantic-ui-react'
+import {Card, Image, Icon} from 'semantic-ui-react'
 import {setCourse} from '../actions/courseActions'
 import {connect} from 'react-redux'
 
@@ -10,22 +10,38 @@ class CourseCard extends Component {
   }
 
   render () {
-    return (
-      <Card centered onClick={this.setCourseShow}>
-        <Card.Content>
-          <Image floated='right' size='mini' src='http://img02.deviantart.net/2df7/i/2012/319/5/9/magic_man_by_damiensaelak-d5l15r9.jpg' />
-          <Card.Header>
-            {this.props.course.title}
-          </Card.Header>
-          <Card.Meta>
-            Taught by blank holder
-          </Card.Meta>
-          <Card.Description>
-            This will probably be a truncated description or location/rate
-          </Card.Description>
-        </Card.Content>
-      </Card>
-    )
+
+    if (!this.props.course.form){
+      return (
+        <Card centered onClick={this.setCourseShow}>
+          <Card.Content>
+            <Image floated='right' size='mini' src='http://img02.deviantart.net/2df7/i/2012/319/5/9/magic_man_by_damiensaelak-d5l15r9.jpg' />
+            <Card.Header>
+              {this.props.course.title}
+            </Card.Header>
+            <Card.Meta>
+              Taught by blank holder
+            </Card.Meta>
+            <Card.Description>
+              This will probably be a truncated description or location/rate
+            </Card.Description>
+          </Card.Content>
+        </Card>
+      )
+    } else {
+      return (
+        <Card centered onClick={this.setCourseShow}>
+          <Card.Content>
+            <Card.Header>
+              Add Course
+            </Card.Header>
+            <Card.Description>
+              <Icon name='plus' />
+            </Card.Description>
+          </Card.Content>
+        </Card>
+      )
+    }
   }
 
 }

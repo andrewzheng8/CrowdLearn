@@ -20,12 +20,13 @@ export const addCourse = course => {
       .then(response => {
         // If request is good...
         // - Update state to show course added
-        //console.log('from server on course creation', response, course)
+        // console.log('from server on course creation', response, course)
         dispatch({type: ADD_COURSE, payload: course})
       })
-      .catch(() => {
+      .catch(err => {
         // If request is bad...
         // - Show an error to the user
+        console.log(err)
         console.log('did not add course correctly')
         // dispatch(authError('Bad Login Info'))
       })

@@ -5,7 +5,7 @@
 
 export const SET_VIEWER = 'set_viewer'
 export const SET_COURSES = 'set_courses'
-export const SET_COURSE = 'ser_course'
+export const SET_COURSE = 'set_course'
 export const ADD_COURSE = 'add_course'
 export const FETCH_COURSES = 'fetch_courses'
 export const AUTH_USER = 'auth_user'

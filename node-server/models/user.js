@@ -1,12 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
+const course = require('./course')
 
 // Define our model
 const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String,
-  courses_taught: [{ type: Schema.Types.ObjectId, ref: 'courses' }]
+  courses_teaching: [{ type: Schema.Types.ObjectId, ref: 'courses' }]
 })
 
 // On Save Hook, encrypt password

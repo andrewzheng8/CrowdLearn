@@ -1,4 +1,4 @@
-import {SET_COURSE} from '../actions/action_types'
+import {SET_COURSE, SHOW_FORM} from '../actions/action_types'
 
 export const courseReducer = (state = {}, action) => {
   switch (action.type) {

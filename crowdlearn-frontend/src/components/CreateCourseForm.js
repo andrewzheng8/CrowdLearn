@@ -15,7 +15,7 @@ class CourseForm extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault()
-    console.log(this.props);
+    console.log(this.props, 'at form submit');
     // Call action creator to add course
     this.props.addCourse(this.state)
     this.setState({
