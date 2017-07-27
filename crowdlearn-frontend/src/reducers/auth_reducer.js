@@ -3,7 +3,7 @@ import {
   UNAUTH_USER,
   AUTH_ERROR,
   FETCH_MESSAGE
-} from '../actions/action_types'
+} from '../actions/types'
 
 export function authReducer (state = {authenticated: false}, action) {
   switch (action.type) {

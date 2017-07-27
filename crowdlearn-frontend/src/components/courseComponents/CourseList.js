@@ -6,7 +6,13 @@ import {Menu} from 'semantic-ui-react'
 class CourseList extends Component {
 
   render () {
-    const courseList = this.props.courses.concat({form: true}).map(c => <Menu.Item><CourseCard key={`course-${c._id}`} course={c} /></Menu.Item>)
+    const courseList = this.props.courses.map(
+      c => {
+        return (
+          <CourseCard key={`course-${c._id}`} course={c} />
+        )
+      }
+    )
     return (
       <Menu fluid vertical style={{'overflow': 'scroll', 'height': '100%'}}>
         <Menu.Header>

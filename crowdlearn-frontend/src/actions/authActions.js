@@ -5,7 +5,7 @@ import {
   AUTH_ERROR,
   FETCH_MESSAGE,
   SET_VIEWER
-} from './action_types'
+} from './types'
 
 const ROOT_URL = 'http://localhost:3000/api/v1'
 

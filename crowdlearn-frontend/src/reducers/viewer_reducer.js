@@ -1,4 +1,4 @@
-import {SET_VIEWER} from '../actions/action_types'
+import {SET_VIEWER} from '../actions/types'
 
 export const viewerReducer = (state = '', action) => {
   switch (action.type) {

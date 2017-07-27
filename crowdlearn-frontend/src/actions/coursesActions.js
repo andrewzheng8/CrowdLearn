@@ -1,12 +1,10 @@
 import axios from 'axios'
-import {SET_COURSES, ADD_COURSE, FETCH_COURSES} from './action_types'
+import {SET_COURSES, SET_COURSE, ADD_COURSE, FETCH_COURSES} from './types'
 
 const ROOT_URL = 'http://localhost:3000/api/v1'
 
 export const setCourses = () => {
-  // return {type: SET_COURSES, payload: courses}
   return dispatch => {
-    // dispatch({type: FETCH_COURSES})
     return axios.get(`${ROOT_URL}/courses`)
     .then(courses => dispatch({type: SET_COURSES, payload: courses.data}))
     .catch(err => console.log(err))
@@ -20,16 +18,35 @@ export const addCourse = course => {
       .then(response => {
         // If request is good...
         // - Update state to show course added
-        // console.log('from server on course creation', response, course)
-        dispatch({type: ADD_COURSE, payload: course})
+        console.log(response, 'responding to add')
+        dispatch({type: ADD_COURSE, payload: response.data})
+        dispatch({type: SET_COURSE, payload: response.data})
       })
       .catch(err => {
         // If request is bad...
         // - Show an error to the user
         console.log(err)
         console.log('did not add course correctly')
-        // dispatch(authError('Bad Login Info'))
       })
+  }
+}
+
+export const addLocation = location => {
+  console.log(location, 'adding loc in client - loc')
+  return function (dispatch) {
+    return axios.post(`${ROOT_URL}/locations`, location)
+    .then(response => {
+      // If request is good...
+      console.log(response, 'responding to add location')
+      dispatch({type: SET_COURSE, payload: response.data}) 
+
+    })
+    .catch(err => {
+      // If request is bad...
+      // - Show an error to the user
+      console.log(err)
+      console.log('did not add location correctly')
+    })
   }
 }
 

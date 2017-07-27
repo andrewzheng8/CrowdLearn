@@ -14,4 +14,5 @@ module.exports = function (app) {
   app.post('/api/v1/signup', Authentication.signup)
   app.post('/api/v1/courses', CourseController.createCourse)
   app.get('/api/v1/courses', CourseController.fetchCourses)
+  app.post('/api/v1/locations', CourseController.addLocation)// ???
 }

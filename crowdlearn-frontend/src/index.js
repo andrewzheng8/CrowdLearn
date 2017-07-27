@@ -10,7 +10,7 @@ import thunk from 'redux-thunk'
 import rootReducer from './reducers/index'
 import 'semantic-ui-css/semantic.min.css'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import {AUTH_USER, SET_VIEWER} from './actions/action_types'
+import {AUTH_USER, SET_VIEWER} from './actions/types'
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk)
