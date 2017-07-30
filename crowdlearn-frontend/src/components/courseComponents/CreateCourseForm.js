@@ -20,7 +20,6 @@ class CourseForm extends Component {
     // console.log(this.props, 'at form submit');
     // Call action creator to add course
     this.props.addCourse(this.state)
-    this.props.setCourses()
   }
 
 

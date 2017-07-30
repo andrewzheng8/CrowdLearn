@@ -1,31 +1,43 @@
 import axios from 'axios'
-import {ADD_LOCATION} from './types'
+import {SET_COURSE, REPLACE_COURSE} from './types'
 
 const ROOT_URL = 'http://localhost:3000/api/v1'
+
+// export const addLocation = (location, courseId) => {
+//   return function (dispatch) {
+//     return axios.post(`${ROOT_URL}/courses/${courseId}/locations`, location)
+//     .then(response => {
+//       // If request is good...
 //
-// export const fetchLocaitons = course => {
-//   return dispatch => {
-//     return axios.get(`${ROOT_URL}/locations`)
-//     .then(courses => dispatch({type: SET_COURSES, payload: courses.data}))
-//     .catch(err => console.log(err))
+//       // update the current show course and replace the instance in the list
+//       dispatch({type: SET_COURSE, payload: response.data})
+//       dispatch({type: REPLACE_COURSE, payload: response.data})
+//     })
+//     .catch(err => {
+//       // If request is bad...
+//       // - Show an error to the user
+//       console.log(err)
+//       console.log('did not add location correctly')
+//     })
 //   }
 // }
-//
-export const addLocation = location => {
+
+export const toggleApproveLocation = (locationId, courseId) => {
   return function (dispatch) {
-    // Submit email/password to the server
-    axios.post(`${ROOT_URL}/locations`, location)
-      .then(response => {
-        // If request is good...
-        // - Update state to show course added
-        console.log(response, 'responding to add location')
-        //dispatch({type: ADD_LOCATION, payload: response.data})
-      })
-      .catch(err => {
-        // If request is bad...
-        // - Show an error to the user
-        console.log(err)
-        console.log('did not add location correctly')
-      })
+    console.log(courseId)
+    return axios.post(`${ROOT_URL}/courses/${courseId}/locations/${locationId}/approve`)
+    .then(response => {
+      // If request is good...
+
+      // update the current show course and replace the instance in the list
+      dispatch({type: SET_COURSE, payload: response.data})
+      dispatch({type: REPLACE_COURSE, payload: response.data})
+    })
+    .catch(err => {
+      // If request is bad...
+      // - Show an error to the user
+      console.log(err)
+      console.log('did not add approve correctly')
+    })
   }
 }

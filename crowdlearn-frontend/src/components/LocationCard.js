@@ -3,33 +3,42 @@ import React, {Component} from 'react'
 // import {setCourse} from '../actions/courseActions'
 import {Segment, Grid, Progress} from 'semantic-ui-react'
 import {connect} from 'react-redux'
+import StudentVoteDetail from './StudentVoteDetail'
+import TeacherViewerVoteDetail from './TeacherViewerVoteDetail'
+import LocationVotingSegment from './LocationVotingSegment'
+import TeacherApprovalCheck from './TeacherApprovalCheck'
 
 class LocationCard extends Component {
 
   render () {
     // refactor into two components
+    const viewerIsTeacher = this.props.viewer === this.props.course.teacher._id
     const viewerVoteCallback = vote => vote.user === this.props.viewer
-    const viewerVoted = !!this.props.location.votes.find(viewerVoteCallback)
+    const viewerVote = this.props.location.votes.find(viewerVoteCallback)
     return (
-      <Segment disabled={viewerVoted}>
+      <Segment>
         <Grid>
           <Grid.Row>
             <Grid.Column width={5}>
-              <h2>{this.props.location.address}</h2>
-              <h3>{this.props.location.time}</h3>
+              <h4>Address: {this.props.location.address}</h4>
+              <h4>Time: {this.props.location.time}</h4>
             </Grid.Column>
             <Grid.Column width={5}>
-              <h2>{'Your contribution'}</h2>
-              <h3>{viewerVoted ? viewerVoted.contribution : 0}</h3>
+              <LocationVotingSegment location={this.props.location} viewerIsTeacher={viewerIsTeacher} viewerVote={viewerVote} />
             </Grid.Column>
             <Grid.Column width={6}>
-              <h2>{'a toggleable form'}</h2>
-              <h3>{this.props.location.time}</h3>
+              <TeacherApprovalCheck teacherVoted={this.props.location.teacherVoted} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column width={16}>
-              <Progress total={this.props.course.price} value={10} progress='percent' />
+              {this.props.course.price === 0 ?
+                <Progress percent={100} success>
+                  FREE!
+                </Progress> :
+                <Progress total={this.props.course.price} value={this.props.location.funding} progress='percent' />
+              }
+
             </Grid.Column>
 
           </Grid.Row>

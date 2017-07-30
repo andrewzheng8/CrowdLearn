@@ -11,7 +11,15 @@ const locationSchema = new Schema({
   address: String,
   time: String,
   votes: [voteSchema],
-  funding: Number
+  funding: Number,
+  teacherVoted: Boolean
+})
+
+locationSchema.pre('save', function (next) {
+  // get access to the user model
+  const location = this
+  location.funding = location.countContributions()
+  next()
 })
 
 locationSchema.methods.countContributions = function () {
@@ -29,6 +37,10 @@ const courseSchema = new Schema({
   // [{type: Schema.Types.ObjectId, ref: 'location'}]
 })
 
-const ModelClass = mongoose.model('course', courseSchema)
+const CourseModel = mongoose.model('course', courseSchema)
+const LocationModel = mongoose.model('location', locationSchema)
 
-module.exports = ModelClass
+module.exports = {
+  Course: CourseModel,
+  Location: LocationModel
+}

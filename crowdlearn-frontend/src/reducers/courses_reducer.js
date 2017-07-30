@@ -1,4 +1,4 @@
-import {SET_COURSES, ADD_COURSE, FETCH_COURSES} from '../actions/types'
+import {SET_COURSES, ADD_COURSE, FETCH_COURSES, REPLACE_COURSE} from '../actions/types'
 
 export const coursesReducer = (state = [], action) => {
   switch (action.type) {
@@ -11,6 +11,12 @@ export const coursesReducer = (state = [], action) => {
       return [...action.payload]// {loading: false, courses: [...action.payload]} // payload should be the viewer/user object
     case ADD_COURSE:
       return [...state, {...action.payload}]
+    case REPLACE_COURSE:
+      let nextState = [...state]
+      const isCourse = el => el._id === action.payload._id
+      const courseIndex = nextState.findIndex(isCourse)
+      nextState[courseIndex] = {...action.payload}
+      return nextState
     default:
       return state
   }

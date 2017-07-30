@@ -11,7 +11,6 @@ class CourseCard extends Component {
 
   render () {
     //refactor into two components
-    if (!this.props.course.form){
       return (
         <Menu.Item>
           <Card centered onClick={this.setCourseShow}>
@@ -30,22 +29,6 @@ class CourseCard extends Component {
           </Card>
         </Menu.Item>
       )
-    } else {
-      return (
-        <Menu.Item>
-          <Card centered onClick={this.setCourseShow}>
-            <Card.Content>
-              <Card.Header>
-                Add Course
-              </Card.Header>
-              <Card.Description>
-                <Icon name='plus' />
-              </Card.Description>
-            </Card.Content>
-          </Card>
-        </Menu.Item>
-      )
-    }
   }
 
 }
