@@ -50,18 +50,4 @@ class CreateVoteForm extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {course: state.course,
-//           viewer: state.viewer
-//   }
-// }
-//
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators({
-//     voteForLocation: voteForLocation
-//   }, dispatch)
-// }
-
-
-// export default connect(mapStateToProps, mapDispatchToProps)(CreateVoteForm)
 export default CreateVoteForm

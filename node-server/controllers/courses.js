@@ -8,37 +8,66 @@ exports.createCourse = (req, res, next) => {
     curriculum = req.body.curriculum,
     price = req.body.price,
     maximumStudents = req.body.maximumStudents,
-    teacherId = req.body.teacher
-
-  if (!title || !curriculum || !teacherId || maximumStudents < 1 || price < 0) {
+    teacherId = req.body.teacher,
+    topicId = req.params.topicId
+  console.log('before validation ======')
+  if (!title || !curriculum || !teacherId || maximumStudents < 1 || price < 0 || !topicId) {
     return res.status(422).send({ error: 'You must provide title, curriculum, non negative price, and max students and teacher'})
   }
+  console.log('before new course ======')
+  var newCourse = new Course({
+    title,
+    curriculum,
+    price,
+    maximumStudents,
+    teacher: teacherId,
+    topic: topicId
+  })
+  console.log('after new course ======')
+  newCourse.save((err, savedCourse) => {
+    if (err) next(err)
+    console.log('In course save')
+    savedCourse.populate({path: 'teacher', select: 'email'}, (err, populatedCourse) => {
+      if (err) next(err)
+      res.json(populatedCourse)
+    })
+  })
 
   // find the current user by id and add ref to them in the new course as the teacher
-  User.findById(teacherId, function (err, teacher) {
-    if (err) { return next(err) }
-    var newCourse = new Course({
-      title,
-      curriculum,
-      price,
-      maximumStudents,
-      teacher: teacher._id
-    })
-
-    // save the course and then use a query to grab it from the database and populate the teacher field
-    newCourse.save((err, savedCourse) => {
-      if (err) next(err)
-      savedCourse.populate({path: 'teacher', select: 'email'}, (err, populatedCourse) => {
-        if (err) next(err)
-        res.json(populatedCourse)
-      })
-    })// end newCoursesave
-  })// end User.findById
+  // User.findById(teacherId, function (err, teacher) {
+  //   if (err) { return next(err) }
+  //   var newCourse = new Course({
+  //     title,
+  //     curriculum,
+  //     price,
+  //     maximumStudents,
+  //     teacher: teacher._id
+  //   })
+  //
+  //   // save the course and then use a query to grab it from the database and populate the teacher field
+  //   newCourse.save((err, savedCourse) => {
+  //     if (err) next(err)
+  //     savedCourse.populate({path: 'teacher', select: 'email'}, (err, populatedCourse) => {
+  //       if (err) next(err)
+  //       res.json(populatedCourse)
+  //     })
+  //   })// end newCoursesave
+  // })// end User.findById
 }//* **end createCourse
 
 //* ***** fetchCourses for use in course master detail view ********
 exports.fetchCourses = (req, res, next) => {
   findCourseAndRespond({path: 'teacher', select: 'email'}, res, next)
+}
+
+exports.fetchTopicCourses = (req, res, next) => {
+  const topicId = req.params.topicId
+  Course.find({topic: topicId}).populate({path: 'teacher', select: 'email'})
+  .exec((err, populatedCourse) => {
+    if (err) next(err)
+    res.json(populatedCourse)
+  })// end exec
+  // findCourseAndRespond({path: 'teacher', select: 'email'}, res, next)
 }
 
 //* ************ Add location to the Course So it can be voted on *********

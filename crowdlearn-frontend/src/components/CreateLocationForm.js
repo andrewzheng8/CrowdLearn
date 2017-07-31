@@ -27,6 +27,7 @@ class LocationForm extends Component {
     // })
     // this.props.toggleForm()
     this.props.addLocation(this.state)
+    console.log(this.props.addLocation, this.state)
     this.setState({
       address: '',
       time: ''

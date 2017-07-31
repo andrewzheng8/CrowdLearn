@@ -11,13 +11,22 @@ export const setCourses = () => {
   }
 }
 
+export const setTopicCourses = topicId => {
+  return dispatch => {
+    return axios.get(`${ROOT_URL}/topics/${topicId}/courses`)
+    .then(courses => dispatch({type: SET_COURSES, payload: courses.data}))
+    .catch(err => console.log(err))
+  }
+}
+
 export const addCourse = course => {
   return function (dispatch) {
     // Submit email/password to the server
-    axios.post(`${ROOT_URL}/courses`, course)
+    console.log(course, 'adding course')
+    axios.post(`${ROOT_URL}/topics/${course.topic}/courses`, course)
       .then(response => {
         // If request is good...
-        // - Update state to show course added in list and set show page to that course
+        // - Update state to show course aådded in list and set show page to that course
         console.log(response, 'responding to add')
         dispatch({type: ADD_COURSE, payload: response.data})
         dispatch({type: SET_COURSE, payload: response.data})
@@ -33,10 +42,10 @@ export const addCourse = course => {
 
 export const addLocation = location => {
   return function (dispatch) {
-    return axios.post(`${ROOT_URL}/locations`, location)
+    axios.post(`${ROOT_URL}/courses/${location.course}/locations`, location)
     .then(response => {
       // If request is good...
-
+      console.log('inside this addLocation')
       // update the current show course and replace the instance in the list
       dispatch({type: SET_COURSE, payload: response.data})
       dispatch({type: REPLACE_COURSE, payload: response.data})

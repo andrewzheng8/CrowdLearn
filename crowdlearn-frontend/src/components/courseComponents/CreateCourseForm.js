@@ -11,7 +11,12 @@ class CourseForm extends Component {
     curriculum: '',
     price: 0,
     maximumStudents: 0,
-    teacher: this.props.viewer
+    teacher: this.props.viewer,
+    topic: this.context.router.route.match.params.topicId
+  }
+
+  static contextTypes = {
+    router: PropTypes.object
   }
 
 
@@ -31,6 +36,7 @@ class CourseForm extends Component {
   }
 
   render () {
+    console.log(this.context)
     return (
       <Form onSubmit={this.handleFormSubmit}>
         <Form.Field>
@@ -60,7 +66,10 @@ class CourseForm extends Component {
 }
 
 const mapStateToProps = state => {
-  return {viewer: state.viewer}
+  return {
+    viewer: state.viewer,
+    topic: state.topic
+  }
 }
 
 const mapDispatchToProps = dispatch => {

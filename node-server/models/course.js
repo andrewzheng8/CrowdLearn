@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const User = require('./user')
+// const User = require('./user')
 
 const voteSchema = new Schema({
   user: {type: Schema.Types.ObjectId, ref: 'user'},
@@ -16,7 +16,6 @@ const locationSchema = new Schema({
 })
 
 locationSchema.pre('save', function (next) {
-  // get access to the user model
   const location = this
   location.funding = location.countContributions()
   next()
@@ -33,9 +32,15 @@ const courseSchema = new Schema({
   teacher: {type: Schema.Types.ObjectId, ref: 'user'},
   price: Number,
   maximumStudents: Number,
-  locations: [locationSchema]
+  locations: [locationSchema],
+  topic: {type: Schema.Types.ObjectId, ref: 'topic'}
   // [{type: Schema.Types.ObjectId, ref: 'location'}]
 })
+
+// courseSchema.pre('save', function (next) {
+//   const course = this
+//   // check all locations, if any have funding greater than price, send a notice to teacher??, send course and locaiton information bundled
+// })
 
 const CourseModel = mongoose.model('course', courseSchema)
 const LocationModel = mongoose.model('location', locationSchema)
