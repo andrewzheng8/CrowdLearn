@@ -44,7 +44,7 @@ const courseSchema = new Schema({
 courseSchema.methods.saveAndPopTeach = function (res, next) {
   return this.save((errSave, savedCourse) => {
     if (errSave) next(errSave)
-    this.populate({path: 'teacher', select: 'email'}, (errPop, populatedCourse) => {
+    this.populate({path: 'teacher locations.votes.user', select: 'email'}, (errPop, populatedCourse) => {
       if (errPop) next(errPop)
       res.json(populatedCourse)
     })
@@ -52,7 +52,7 @@ courseSchema.methods.saveAndPopTeach = function (res, next) {
 }
 
 courseSchema.statics.findAndPopTeach = function (filter, res, next) {
-  return this.find(filter).populate({path: 'teacher', select: 'email'}).exec((err, populatedCourse) => {
+  return this.find(filter).populate({path: 'teacher locations.votes.user', select: 'email'}).exec((err, populatedCourse) => {
     if (err) next(err)
     res.json(populatedCourse)
   })// end exec

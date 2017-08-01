@@ -1,5 +1,12 @@
 import {SET_TOPIC} from './types'
+import axios from 'axios'
 
-export const setTopic = topic => {
-  return {type: SET_TOPIC, payload: topic}
+const ROOT_URL = 'http://localhost:3000/api/v1'
+
+export const setTopic = topicId => {
+  return dispatch => {
+    return axios.get(`${ROOT_URL}/topics/${topicId}`)
+    .then(topic => dispatch({type: SET_TOPIC, payload: topic.data}))
+    .catch(err => console.log(err))
+  }
 }

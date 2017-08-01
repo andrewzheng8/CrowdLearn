@@ -30,11 +30,12 @@ exports.createCourse = (req, res, next) => {
 //* ***** fetchCourses for use in course master detail view ********
 exports.fetchCourses = (req, res, next) => {
   const filter = req.body
+  console.log(filter, 'filter thing')
 
   if (!filter) {
     return res.status(422).send({ error: 'You must a filter'})
   }
-  Course.findAndPopTeach(filter)
+  Course.findAndPopTeach(filter, res, next)
 }
 
 exports.fetchTopicCourses = (req, res, next) => {

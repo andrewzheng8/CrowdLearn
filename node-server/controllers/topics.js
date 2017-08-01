@@ -27,6 +27,20 @@ exports.fetchTopics = (req, res, next) => {
   })
 }
 
+exports.fetchTopic = (req, res, next) => {
+  const topicId = req.params.topicId
+
+  if (!topicId) {
+    return res.status(422).send({ error: 'You must provide a topicId'})
+  }
+  // findCourseAndRespond({path: 'teacher', select: 'email'}, res, next)
+  Topic.findById(topicId).exec((err, topic) => {
+    if (err) next(err)
+    console.log(topic)
+    res.json(topic)
+  })
+}
+
 //* ************ Add location to the Course So it can be voted on *********
 exports.addLocation = (req, res, next) => {
   const address = req.body.address,

@@ -9,8 +9,27 @@ exports.fetchUser = function (req, res, next) {
     return res.status(422).send({ error: 'You must provide valid userId'})
   }
 
-  User.findById(userId, 'email', (err, user) => {
+  User.findById(userId, 'email topics_following courses_following', (err, user) => {
     if (err) next(err)
     res.json(user)
+  })
+}
+
+exports.followTopic = function (req, res, next) {
+  const userId = req.params.userId,
+    topicId = req.params.topicId
+
+  if (!userId || !topicId) {
+    return res.status(422).send({ error: 'You must provide valid userId and topicId'})
+  }
+
+  User.findById(userId, 'email topics_following courses_following', (err, user) => {
+    if (err) next(err)
+    user.topics_following.push(topicId)
+
+    user.save((err, savedUser) => {
+      if (err) next(err)
+      res.json(savedUser)
+    })
   })
 }

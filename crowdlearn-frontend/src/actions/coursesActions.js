@@ -3,9 +3,9 @@ import {SET_COURSES, SET_COURSE, ADD_COURSE, FETCH_COURSES, REPLACE_COURSE} from
 
 const ROOT_URL = 'http://localhost:3000/api/v1'
 
-export const setCourses = () => {
+export const setCourses = (filter) => {
   return dispatch => {
-    return axios.get(`${ROOT_URL}/courses`)
+    return axios.post(`${ROOT_URL}/courses`, filter)
     .then(courses => dispatch({type: SET_COURSES, payload: courses.data}))
     .catch(err => console.log(err))
   }

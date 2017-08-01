@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 import {Grid} from 'semantic-ui-react'
 import ProfileMenu from './ProfileMenu'
+import {connect} from 'react-redux'
+import ProfilePageContainer from './ProfilePageContainer'
 
-class MyProfile extends Component {
+class MyProfilePage extends Component {
   state = {
     activeItem: 'profile'
   }
@@ -17,14 +19,27 @@ class MyProfile extends Component {
     return (
       <Grid>
         <Grid.Row>
-          <ProfileMenu setActiveItem={this.setActiveItem} profileMenu={this.state} />
+          <Grid.Column width={3}>
+              <ProfileMenu setActiveItem={this.setActiveItem} profileMenu={this.state} />
+          </Grid.Column>
+
         </Grid.Row>
         <Grid.Row>
-            My Profile Page Container (has state for any met funding)
+          <Grid.Column width={16}>
+            <ProfilePageContainer profileMenu={this.state} />
+          </Grid.Column>
+
         </Grid.Row>
       </Grid>
     )
   }
 }
-
-export default MyProfile
+export default MyProfilePage
+//
+// const mapStateToProps = state => {
+//   return {
+//     viewer: state.viewer
+//   }
+// }
+//
+// export default connect(mapStateToProps)(MyProfile)

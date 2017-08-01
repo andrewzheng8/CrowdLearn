@@ -1,49 +1,40 @@
 import React, {Component} from 'react'
 // import {COURSES} from '../data'
 import {connect} from 'react-redux'
-import {setTopicCourses} from '../actions/coursesActions'
-import {setTopic} from '../actions/topicActions'
+import {setCourses} from '../actions/coursesActions'
 import {setCourse} from '../actions/courseActions'
 import CourseList from '../components/courseComponents/CourseList'
 import CourseShow from '../components/courseComponents/CourseShow'
 import {Grid, Button, Icon} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
-class TopicCoursesContainer extends Component {
+class TeachingCoursesContainer extends Component {
 
   static contextTypes = {
     router: PropTypes.object
   }
 
   componentWillMount () {
-    this.props.setTopicCourses(this.context.router.route.match.params.topicId)
-    this.props.setTopic(this.context.router.route.match.params.topicId)
+    console.log('filter thing in teaching courses container', this.props.filter)
+    this.props.setCourses(this.props.filter)
+    this.props.setCourse({})
   }
 
   setCourseShowForm = () => {
     this.props.setCourse({form: true})
   }
 
-  followTopic = () => {
-
-  }
-
-  unFollowTopic = () => {
-
-  }
-
   render () {
     // return class list and class show component, class list should change the store state of what
     // is in class show, this component should fetch the appropriate classes
-    const isTopicPage = true
-    const topicId = this.props.topic._id
+
     return (
       <Grid centered divided>
         <Grid.Row style={{'height': '700px'}}>
 
           <Grid.Column width={5}>
             <Grid.Row style={{'height': '600px'}}>
-              <CourseList courses={this.props.courses} isTopicPage={isTopicPage} topic={this.props.topic} />
+              <CourseList courses={this.props.courses} />
             </Grid.Row>
             <Grid.Row style={{'height': '100px'}}>
               <Button style={{'height': '100%', 'width': '100%'}}
@@ -70,9 +61,8 @@ class TopicCoursesContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setTopicCourses: courses => dispatch(setTopicCourses(courses)),
-    setCourse: course => dispatch(setCourse(course)),
-    setTopic: topicId => dispatch(setTopic(topicId))
+    setCourses: filter => dispatch(setCourses(filter)),
+    setCourse: course => dispatch(setCourse(course))
 
   }
 }
@@ -86,4 +76,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopicCoursesContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(TeachingCoursesContainer)

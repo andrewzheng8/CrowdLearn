@@ -4,15 +4,11 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import MyProfile from './MyProfile'
 import Following from './Following'
-import CoursesTeaching from './CoursesTeaching'
+import CoursesTeaching from '../../containers/TeachingCoursesContainer'
 // import CourseShow from '../components/courseComponents/CourseShow'
 import {Grid, Button, Icon} from 'semantic-ui-react'
 
 class MyProfileContainer extends Component {
-
-  componentWillMount () {
-    this.props.setTopics()
-  }
 
   render () {
     switch (this.props.profileMenu.activeItem) {
@@ -21,9 +17,20 @@ class MyProfileContainer extends Component {
       case 'following':
         return <Following />
       case 'teaching':
-        return <CoursesTeaching />
+        return <CoursesTeaching filter={{teacher: this.props.viewer._id}} />
       default:
-        return <TopicsList topics={this.props.topics} />
+        return <h3>I am nothing</h3>
     }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    courses: state.courses,
+    course: state.course,
+    topic: state.topic,
+    viewer: state.viewer
+  }
+}
+
+export default connect(mapStateToProps)(MyProfileContainer)

@@ -24,7 +24,12 @@ class LocationCard extends Component {
               <h4>Time: {this.props.location.time}</h4>
             </Grid.Column>
             <Grid.Column width={5}>
-              <LocationVotingSegment location={this.props.location} viewerIsTeacher={viewerIsTeacher} viewerVote={viewerVote} />
+              <LocationVotingSegment
+                location={this.props.location}
+                viewerIsTeacher={viewerIsTeacher}
+                viewerVote={viewerVote}
+                course={this.props.course}
+              />
             </Grid.Column>
             <Grid.Column width={6}>
               <TeacherApprovalCheck teacherVoted={this.props.location.teacherVoted} />
