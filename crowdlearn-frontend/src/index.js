@@ -30,7 +30,7 @@ if (token) {
 }
 if (userId) {
   // set the viewer in state to be the users id
-  setViewer(userId)(store.dispatch)
+  store.dispatch(setViewer(userId))
 }
 
 ReactDOM.render(

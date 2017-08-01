@@ -7,8 +7,8 @@ const course = require('./course')
 const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String,
-  courses_following: [{ type: Schema.Types.ObjectId, ref: 'courses' }],
-  topics_following: [{ type: Schema.Types.ObjectId, ref: 'topics' }]
+  courses_following: [{ type: Schema.Types.ObjectId, ref: 'course' }],
+  topics_following: [{ type: Schema.Types.ObjectId, ref: 'topic' }]
 })
 
 // On Save Hook, encrypt password

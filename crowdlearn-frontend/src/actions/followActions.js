@@ -21,7 +21,7 @@ export const followTopic = (userId, topicId) => {
   }
 }
 
-export const followTopic = (userId, topicId) => {
+export const unfollowTopic = (userId, topicId) => {
   return function (dispatch) {
     return axios.delete(`${ROOT_URL}/users/${userId}/topics/${topicId}/unfollow`)
     .then(response => {
