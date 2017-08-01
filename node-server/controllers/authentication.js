@@ -1,5 +1,8 @@
 const jwt = require('jwt-simple')
 const User = require('../models/user')
+const googleMapsClient = require('@google/maps').createClient({
+  key: 'AIzaSyD-elxORKUUktuhgwrztT8pZPbyX2sS_4w'
+})
 
 function tokenForUser (user) {
   const timestamp = new Date().getTime()
@@ -16,6 +19,7 @@ exports.signin = function (req, res, next) {
 exports.signup = function (req, res, next) {
   const email = req.body.email
   const password = req.body.password
+  // const residence = req.body.residence add in nearby residence to where you reside
 
   if (!email || !password) {
     return res.status(422).send({ error: 'You must provide email and password'})

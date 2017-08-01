@@ -28,6 +28,5 @@ module.exports = function (app) {
   app.post('/api/v1/courses/:courseId/locations/:locationId/votes', VoteController.voteForLocation)
   app.patch('/api/v1/courses/:courseId/locations/:locationId/votes/:voteId', VoteController.updateVote)
   app.delete('/api/v1/courses/:courseId/locations/:locationId/votes/:voteId', VoteController.removeVote)
-  app.post('/api/v1/locations', CourseController.addLocation)// ???
 }
 // create prefix in index app.use('/api/v1', apiRoutes)

@@ -16,19 +16,12 @@ const locationSchema = new Schema({
   votes: [voteSchema],
   funding: Number,
   teacherVoted: Boolean,
-  loc: {type:[Number], index: '2d'}
+  loc: {type: [Number], index: '2d'}
 })
 
 locationSchema.pre('save', function (next) {
   const location = this
   location.funding = location.countContributions()
-  googleMapsClient.geocode({
-    address: location.address
-  }, function (err, response) {
-    if (!err) {
-      console.log(response.json.results[0].geometry.location)
-    }
-  })
   next()
 })
 
@@ -56,6 +49,13 @@ courseSchema.methods.saveAndPopTeach = function (res, next) {
       res.json(populatedCourse)
     })
   })
+}
+
+courseSchema.statics.findAndPopTeach = function (filter, res, next) {
+  return this.find(filter).populate({path: 'teacher', select: 'email'}).exec((err, populatedCourse) => {
+    if (err) next(err)
+    res.json(populatedCourse)
+  })// end exec
 }
 
 // courseSchema.pre('save', function (next) {
