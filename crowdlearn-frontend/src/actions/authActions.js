@@ -20,8 +20,8 @@ export function signinUser ({ email, password }) {
         dispatch({ type: AUTH_USER })
         // - Save the JWT token
         localStorage.setItem('token', response.data.token)
-        localStorage.setItem('userId', response.data.userId)// change
-        dispatch({type: SET_VIEWER, payload: response.data.userId})
+        localStorage.setItem('userId', response.data.user._id)// change
+        dispatch({type: SET_VIEWER, payload: response.data.user})
       })
       .catch(() => {
         // If request is bad...
@@ -37,8 +37,8 @@ export function signupUser ({ email, password }) {
       .then(response => {
         dispatch({ type: AUTH_USER })
         localStorage.setItem('token', response.data.token)
-        localStorage.setItem('userId', response.data.userId)
-        dispatch({type: SET_VIEWER, payload: response.data.userId})// change
+        localStorage.setItem('userId', response.data.user._id)
+        dispatch({type: SET_VIEWER, payload: response.data.user})// change
       })
       .catch(response => dispatch(authError(response.data.error)))
   }

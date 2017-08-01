@@ -4,6 +4,7 @@ import axios from 'axios'
 const ROOT_URL = 'http://localhost:3000/api/v1'
 
 export const setTopic = topicId => {
+  console.log('topicId at setTopic', topicId)
   return dispatch => {
     return axios.get(`${ROOT_URL}/topics/${topicId}`)
     .then(topic => dispatch({type: SET_TOPIC, payload: topic.data}))

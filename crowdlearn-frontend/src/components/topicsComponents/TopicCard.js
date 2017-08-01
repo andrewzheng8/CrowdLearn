@@ -13,7 +13,6 @@ class TopicCard extends Component {
   }
 
   goToTopic = () => {
-    this.props.setTopic(this.props.topic)
     this.context.router.history.push(`topics/${this.props.topic._id}`)
   }
 

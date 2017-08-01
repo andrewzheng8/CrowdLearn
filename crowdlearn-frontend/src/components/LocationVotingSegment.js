@@ -10,7 +10,7 @@ const LocationVotingSegment = ({location, viewerIsTeacher, viewerVote, course}) 
     return (
       <div>
         <TeacherApprovalButton location={location} />
-        {funded ? <ShowVotersModal location={location} /> : null }
+        {funded && location.teacherVoted ? <ShowVotersModal location={location} /> : null }
       </div>
 
     )
