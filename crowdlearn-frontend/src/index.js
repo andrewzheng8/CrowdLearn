@@ -11,6 +11,7 @@ import rootReducer from './reducers/index'
 import 'semantic-ui-css/semantic.min.css'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import {AUTH_USER, SET_VIEWER} from './actions/types'
+import {setViewer} from './actions/viewerActions'
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk)
@@ -29,7 +30,7 @@ if (token) {
 }
 if (userId) {
   // set the viewer in state to be the users id
-  store.dispatch({type: SET_VIEWER, payload: userId})
+  setViewer(userId)(store.dispatch)
 }
 
 ReactDOM.render(

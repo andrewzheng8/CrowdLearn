@@ -12,8 +12,8 @@ class LocationCard extends Component {
 
   render () {
     // refactor into two components
-    const viewerIsTeacher = this.props.viewer === this.props.course.teacher._id
-    const viewerVoteCallback = vote => vote.user === this.props.viewer
+    const viewerIsTeacher = this.props.viewer._id === this.props.course.teacher._id
+    const viewerVoteCallback = vote => vote.user === this.props.viewer._id
     const viewerVote = this.props.location.votes.find(viewerVoteCallback)
     return (
       <Segment>

@@ -1,5 +1,12 @@
 import {SET_VIEWER} from './types'
+import axios from 'axios'
 
-export function setUser = (user) =>
-  return {type:SET_VIEWER, payload: user}
+const ROOT_URL = 'http://localhost:3000/api/v1'
+
+export function setViewer (userId) {
+  return dispatch => {
+    return axios.get(`${ROOT_URL}/users/${userId}`)
+      .then(response => dispatch({type: SET_VIEWER, payload: response.data}))
+      .catch(err => console.log(err))
+  }
 }

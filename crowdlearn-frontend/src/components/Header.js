@@ -35,7 +35,7 @@ class Header extends Component {
 
   render () {
     return (
-      <Menu>
+      <Menu color='blue' inverted>
         <Menu.Item>
           <Link to='/'>CrowdLearn</Link>
         </Menu.Item>

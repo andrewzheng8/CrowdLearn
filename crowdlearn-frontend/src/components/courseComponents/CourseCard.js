@@ -20,7 +20,7 @@ class CourseCard extends Component {
                 {this.props.course.title}
               </Card.Header>
               <Card.Meta>
-                Taught by blank holder
+                {this.props.course.teacher.email}
               </Card.Meta>
               <Card.Description>
                 This will probably be a truncated description or location/rate

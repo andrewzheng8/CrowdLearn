@@ -1,5 +1,8 @@
 const Course = require('../models/course').Course
 const Location = require('../models/course').Location
+const googleMapsClient = require('@google/maps').createClient({
+  key: 'AIzaSyD-elxORKUUktuhgwrztT8pZPbyX2sS_4w'
+})
 
 exports.toggleApproveLocation = (req, res, next) => {
   const locationId = req.params.locationId,
@@ -39,20 +42,35 @@ exports.addLocation = (req, res, next) => {
   Course.findById(courseId).exec((err, course) => {
     if (err) next(err)
 
-    const newLoc = new Location({address, time, funding, teacherVoted})
-    course.locations.push(newLoc)
-    console.log('before save')
-    course.save((err, savedCourse) => {
-      console.log('inside the course save')
-      if (err) {
-        console.log(err)
-        next(err)
+    googleMapsClient.geocode({
+      address
+    }, function (err, response) {
+      console.log('possibly in gmaps client')
+      console.log('this is an err', err)
+      if (!err) {
+        console.log('possibly in gmaps client not error', response.json.results[0].geometry.location)
+        const long = response.json.results[0].geometry.location.lng
+        console.log('loc obj', long, lat)
+        const lat = response.json.results[0].geometry.location.lat
+        console.log('loc obj', long, lat)
+
+        const newLoc = new Location({address, time, funding, teacherVoted, loc: [long, lat]})
+
+        course.locations.push(newLoc)
+        console.log('before save')
+        course.save((err, savedCourse) => {
+          console.log('inside the course save')
+          if (err) {
+            console.log(err)
+            next(err)
+          }
+          savedCourse.populate({path: 'teacher', select: 'email'}, (err, populatedCourse) => {
+            if (err) next(err)
+            res.json(populatedCourse)
+          })
+          // findCourseAndRespond('teacher', res, next, savedCourse._id)
+        })
       }
-      savedCourse.populate({path: 'teacher', select: 'email'}, (err, populatedCourse) => {
-        if (err) next(err)
-        res.json(populatedCourse)
-      })
-      // findCourseAndRespond('teacher', res, next, savedCourse._id)
     })
   })// end findById exec, possibly change to be immediate execution
 } //* **** end addLocation

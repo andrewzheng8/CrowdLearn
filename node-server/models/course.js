@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const googleMapsClient = require('@google/maps').createClient({
+  key: 'AIzaSyD-elxORKUUktuhgwrztT8pZPbyX2sS_4w'
+})
 // const User = require('./user')
 
 const voteSchema = new Schema({
@@ -12,12 +15,20 @@ const locationSchema = new Schema({
   time: String,
   votes: [voteSchema],
   funding: Number,
-  teacherVoted: Boolean
+  teacherVoted: Boolean,
+  loc: {type:[Number], index: '2d'}
 })
 
 locationSchema.pre('save', function (next) {
   const location = this
   location.funding = location.countContributions()
+  googleMapsClient.geocode({
+    address: location.address
+  }, function (err, response) {
+    if (!err) {
+      console.log(response.json.results[0].geometry.location)
+    }
+  })
   next()
 })
 
@@ -36,6 +47,16 @@ const courseSchema = new Schema({
   topic: {type: Schema.Types.ObjectId, ref: 'topic'}
   // [{type: Schema.Types.ObjectId, ref: 'location'}]
 })
+
+courseSchema.methods.saveAndPopTeach = function (res, next) {
+  return this.save((errSave, savedCourse) => {
+    if (errSave) next(errSave)
+    this.populate({path: 'teacher', select: 'email'}, (errPop, populatedCourse) => {
+      if (errPop) next(errPop)
+      res.json(populatedCourse)
+    })
+  })
+}
 
 // courseSchema.pre('save', function (next) {
 //   const course = this

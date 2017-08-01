@@ -24,14 +24,16 @@ exports.createCourse = (req, res, next) => {
     topic: topicId
   })
   console.log('after new course ======')
-  newCourse.save((err, savedCourse) => {
-    if (err) next(err)
-    console.log('In course save')
-    savedCourse.populate({path: 'teacher', select: 'email'}, (err, populatedCourse) => {
-      if (err) next(err)
-      res.json(populatedCourse)
-    })
-  })
+  newCourse.saveAndPopTeach(res, next)
+
+  // newCourse.save((err, savedCourse) => {
+  //   if (err) next(err)
+  //   console.log('In course save')
+  //   savedCourse.populate({path: 'teacher', select: 'email'}, (err, populatedCourse) => {
+  //     if (err) next(err)
+  //     res.json(populatedCourse)
+  //   })
+  // })
 
   // find the current user by id and add ref to them in the new course as the teacher
   // User.findById(teacherId, function (err, teacher) {

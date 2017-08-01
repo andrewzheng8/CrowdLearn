@@ -11,7 +11,7 @@ class CourseForm extends Component {
     curriculum: '',
     price: 0,
     maximumStudents: 0,
-    teacher: this.props.viewer,
+    teacher: this.props.viewer._id,
     topic: this.context.router.route.match.params.topicId
   }
 
