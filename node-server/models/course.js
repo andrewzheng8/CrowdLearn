@@ -58,6 +58,13 @@ courseSchema.statics.findAndPopTeach = function (filter, res, next) {
   })// end exec
 }
 
+courseSchema.statics.findSingleAndPopTeach = function (courseId, res, next) {
+  return this.findById(courseId).populate({path: 'teacher locations.votes.user', select: 'email'}).exec((err, populatedCourse) => {
+    if (err) next(err)
+    res.json(populatedCourse)
+  })// end exec
+}
+
 // courseSchema.pre('save', function (next) {
 //   const course = this
 //   // check all locations, if any have funding greater than price, send a notice to teacher??, send course and locaiton information bundled

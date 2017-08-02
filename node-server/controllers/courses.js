@@ -38,6 +38,15 @@ exports.fetchCourses = (req, res, next) => {
   Course.findAndPopTeach(filter, res, next)
 }
 
+exports.fetchCourse = (req, res, next) => {
+  const courseId = req.params.courseId
+
+  if (!courseId) {
+    return res.status(422).send({ error: 'You must provide a courseId'})
+  }
+  Course.findSingleAndPopTeach(courseId, res, next)
+}
+
 exports.fetchTopicCourses = (req, res, next) => {
   const topicId = req.params.topicId
   Course.findAndPopTeach({topic: topicId}, res, next)

@@ -26,6 +26,7 @@ module.exports = function (app) {
   app.post('/api/v1/topics/:topicId/courses', CourseController.createCourse)
   app.post('/api/v1/topics', TopicController.createTopic)
   // app.post('/api/v1/courses', CourseController.createCourse)
+  app.get('/api/v1/courses/:courseId', CourseController.fetchCourse)
   app.post('/api/v1/courses/:courseId/locations', LocationController.addLocation)
   app.post('/api/v1/courses/:courseId/locations/:locationId/approve', LocationController.toggleApproveLocation)
   app.post('/api/v1/courses/:courseId/locations/:locationId/votes', VoteController.voteForLocation)

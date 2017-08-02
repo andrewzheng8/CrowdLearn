@@ -5,6 +5,7 @@ import SignOut from '../components/authComponents/SignOut'
 import SignInForm from '../components/authComponents/SignInForm'
 import TopicCoursesContainer from './TopicCoursesContainer'
 import TopicsPage from '../components/topicsComponents/TopicsPage'
+import CoursePage from '../components/courseComponents/CoursePage'
 import MyProfilePage from '../components/Profile/MyProfilePage'
 import RequireAuth from '../hocs/RequireAuth'
 import NavBar from '../components/Header'
@@ -22,6 +23,7 @@ class App extends Component {
             <Route path='/my_profile' component={RequireAuth(MyProfilePage)} />
             <Route exact path='/topics' component={RequireAuth(TopicsPage)} />
             <Route path='/topics/:topicId' component={RequireAuth(TopicCoursesContainer)} />
+            <Route path='/courses/:courseId' component={RequireAuth(CoursePage)} />
 
           </div>
         </Router>

@@ -38,3 +38,39 @@ export const unfollowTopic = (userId, topicId) => {
     })
   }
 }
+
+export const followCourse = (userId, courseId) => {
+  return function (dispatch) {
+    return axios.patch(`${ROOT_URL}/users/${userId}/courses/${courseId}/follow`)
+    .then(response => {
+      // If request is good...
+
+      // update the current show course and replace the instance in the list
+      dispatch({type: SET_VIEWER, payload: response.data})
+    })
+    .catch(err => {
+      // If request is bad...
+      // - Show an error to the user
+      console.log(err)
+      console.log('did not follow course correctly')
+    })
+  }
+}
+
+export const unfollowCourse = (userId, courseId) => {
+  return function (dispatch) {
+    return axios.delete(`${ROOT_URL}/users/${userId}/topics/${courseId}/unfollow`)
+    .then(response => {
+      // If request is good...
+
+      // update the current show course and replace the instance in the list
+      dispatch({type: SET_VIEWER, payload: response.data})
+    })
+    .catch(err => {
+      // If request is bad...
+      // - Show an error to the user
+      console.log(err)
+      console.log('did not unfollow course correctly')
+    })
+  }
+}
