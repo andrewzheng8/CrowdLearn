@@ -13,14 +13,14 @@ class FollowCourseContainer extends Component {
 
   handleUnfollow = () => {
     //remove topic id from user topics array
-    this.props.unfollowCourse(this.props.viewer._id, this.props.coure._id)
+    this.props.unfollowCourse(this.props.viewer._id, this.props.course._id)
   }
 
   render () {
     console.log(this.props, 'viewer')
-    const viewerFollowsTopic = this.props.viewer.courses_following ? this.props.viewer.courses_following.find(c => c._id === this.props.course._id) : null //do i need to check topic id against actual topics
-    console.log(viewerFollowsTopic, 'viewerFollowsTopic')
-    if (!viewerFollowsTopic) {
+    const viewerFollowsCourse = this.props.viewer.courses_following ? this.props.viewer.courses_following.find(c => c._id === this.props.course._id) : null //do i need to check topic id against actual topics
+    console.log(viewerFollowsCourse, 'viewerFollowsCourse')
+    if (!viewerFollowsCourse) {
       return <Button onClick={this.handleFollow}>Follow</Button>
     } else {
       return <Button onClick={this.handleUnfollow}>Unfollow</Button>

@@ -59,7 +59,7 @@ export const followCourse = (userId, courseId) => {
 
 export const unfollowCourse = (userId, courseId) => {
   return function (dispatch) {
-    return axios.delete(`${ROOT_URL}/users/${userId}/topics/${courseId}/unfollow`)
+    return axios.delete(`${ROOT_URL}/users/${userId}/courses/${courseId}/unfollow`)
     .then(response => {
       // If request is good...
 

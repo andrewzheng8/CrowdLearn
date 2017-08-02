@@ -19,6 +19,8 @@ module.exports = function (app) {
   app.get('/api/v1/users/:userId', UserController.fetchUser)
   app.patch('/api/v1/users/:userId/topics/:topicId/follow', UserController.followTopic)
   app.delete('/api/v1/users/:userId/topics/:topicId/unfollow', UserController.unfollowTopic)
+  app.patch('/api/v1/users/:userId/courses/:courseId/follow', UserController.followCourse)
+  app.delete('/api/v1/users/:userId/courses/:courseId/unfollow', UserController.unfollowCourse)
   app.post('/api/v1/courses', CourseController.fetchCourses)
   app.get('/api/v1/topics', TopicController.fetchTopics)
   app.get('/api/v1/topics/:topicId', TopicController.fetchTopic)

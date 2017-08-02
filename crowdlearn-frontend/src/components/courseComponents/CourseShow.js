@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Container, Header, Button} from 'semantic-ui-react'
 import CreateCourseForm from './CreateCourseForm'
 import CreateLocationForm from '../CreateLocationForm'
+import FollowCourseContainer from './FollowCourseContainer'
 import LocationCard from '../LocationCard'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -25,6 +26,7 @@ export default class CourseShow extends Component {
       return (
         <Container style={{'overflow': 'scroll', 'height': '100%'}}>
           <Header as='h2'>{this.props.course.title}</Header>
+          <FollowCourseContainer />
           <p>Curriculum: {this.props.course.curriculum}</p>
           <p>teacher email :{this.props.course.teacher ? this.props.course.teacher.email : null}</p>
           <p>Price: {this.props.course.price}</p>

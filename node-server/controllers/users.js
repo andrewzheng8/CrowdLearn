@@ -68,3 +68,50 @@ exports.unfollowTopic = function (req, res, next) {
     })
   })
 }
+
+exports.followCourse = function (req, res, next) {
+  const userId = req.params.userId,
+    courseId = req.params.courseId
+
+  if (!userId || !courseId) {
+    return res.status(422).send({ error: 'You must provide valid userId and courseId'})
+  }
+
+  User.findById(userId, 'email topics_following courses_following', (err, user) => {
+    if (err) next(err)
+    user.courses_following.push(courseId)
+
+    user.save((err, savedUser) => {
+      if (err) next(err)
+      savedUser.populate('topics_following courses_following', (err, popUser) => {
+        if (err) next(err)
+        console.log(err, 'error')
+        console.log(popUser, 'inside populate')
+        res.json(popUser)
+      })
+    })
+  })
+}
+
+exports.unfollowCourse = function (req, res, next) {
+  const userId = req.params.userId,
+    courseId = req.params.courseId
+
+  if (!userId || !courseId) {
+    return res.status(422).send({ error: 'You must provide valid userId and topicId'})
+  }
+
+  User.findById(userId, 'email topics_following courses_following', (err, user) => {
+    if (err) next(err)
+    // console.log(user.courses_following.filter(t => t.toString() !== courseId))
+    user.courses_following = user.courses_following.filter(c => c.toString() !== courseId)
+    // console.log(user.topics_following, 'after filter')
+    user.save((err, savedUser) => {
+      if (err) next(err)
+      savedUser.populate('topics_following courses_following', (err, popUser) => {
+        if (err) next(err)
+        res.json(popUser)
+      })
+    })
+  })
+}
