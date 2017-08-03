@@ -24,6 +24,11 @@ class CreateVoteForm extends Component {
     this.props.createVote(this.state)
   }
 
+  handleCancel = event => {
+    event.preventDefault()
+    this.props.toggleVoteForm()
+  }
+
   render () {
     return (
       <Form onSubmit={this.handleFormSubmit}>
@@ -39,7 +44,7 @@ class CreateVoteForm extends Component {
                 Vote
               </Button>
               <Button basic color='red'>
-                <Icon name='remove' onClick={this.props.toggleVoteForm} />
+                <Icon name='remove' onClick={this.props.handleCancel} />
                 Cancel
               </Button>
             </Button.Group>

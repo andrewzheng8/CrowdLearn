@@ -21,7 +21,7 @@ class TopicCard extends Component {
 
     return (
       <Card onClick={this.goToTopic}>
-        <Image src={this.props.topic.img_url} />
+        <Image src={this.props.topic.img_url} size='large' />
         <Card.Content>
           <Card.Header>
             {this.props.topic.name}

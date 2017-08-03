@@ -23,6 +23,11 @@ class UpdateVoteForm extends Component {
     this.props.updateVote(this.state)
   }
 
+  handleCancel = event => {
+    event.preventDefault()
+    this.props.toggleVoteForm()
+  }
+
 
   render () {
     return (
@@ -38,7 +43,7 @@ class UpdateVoteForm extends Component {
                 <Icon name='file text outline' />
                 Update
               </Button>
-              <Button basic color='red' onClick={this.props.toggleVoteForm}>
+              <Button basic color='red' onClick={this.handleCancel}>
                 <Icon name='remove' />
                 Cancel
               </Button>

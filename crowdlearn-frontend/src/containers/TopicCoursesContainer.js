@@ -18,6 +18,7 @@ class TopicCoursesContainer extends Component {
   componentWillMount () {
     this.props.setTopicCourses(this.context.router.route.match.params.topicId)
     this.props.setTopic(this.context.router.route.match.params.topicId)
+    this.props.setCourse({})
   }
 
   setCourseShowForm = () => {
