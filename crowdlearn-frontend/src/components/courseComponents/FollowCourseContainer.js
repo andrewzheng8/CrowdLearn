@@ -17,13 +17,11 @@ class FollowCourseContainer extends Component {
   }
 
   render () {
-    console.log(this.props, 'viewer')
     const viewerFollowsCourse = this.props.viewer.courses_following ? this.props.viewer.courses_following.find(c => c._id === this.props.course._id) : null //do i need to check topic id against actual topics
-    console.log(viewerFollowsCourse, 'viewerFollowsCourse')
     if (!viewerFollowsCourse) {
-      return <Button onClick={this.handleFollow}>Follow</Button>
+      return <Button onClick={this.handleFollow} color='blue' basic>Follow</Button>
     } else {
-      return <Button onClick={this.handleUnfollow}>Unfollow</Button>
+      return <Button onClick={this.handleUnfollow} basic>Unfollow</Button>
     }
   }
 

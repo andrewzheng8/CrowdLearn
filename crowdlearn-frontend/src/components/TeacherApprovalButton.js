@@ -14,14 +14,14 @@ class TeacherApprovalButton extends Component {
   render () {
     if (!this.props.location.teacherVoted) {
       return(
-        <Button onClick={this.handleClick} color='green'>
+        <Button onClick={this.handleClick} color='green' basic>
           <Icon name='check circle' />
           Approve this location
         </Button>
       )
     } else {
         return (
-          <Button onClick={this.handleClick} color='red'>
+          <Button onClick={this.handleClick} color='red' basic>
             <Icon name='remove circle' />
             Revoke approval
           </Button>

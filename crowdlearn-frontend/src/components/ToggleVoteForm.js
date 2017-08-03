@@ -9,12 +9,14 @@ class ToggleVoteForm extends Component {
   }
 
   toggleVoteForm = () => {
+    console.log('in toggle form')
     this.setState({
       showForm: !this.state.showForm
     })
   }
 
   render () {
+    console.log('render toggle vote form')
     if (!this.state.showForm && this.props.viewerVote) {
       return(
         <div>

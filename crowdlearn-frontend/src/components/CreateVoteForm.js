@@ -20,12 +20,14 @@ class CreateVoteForm extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault()
+    console.log('in handle form submit for create', event)
     this.props.toggleVoteForm()
     this.props.createVote(this.state)
   }
 
   handleCancel = event => {
     event.preventDefault()
+    console.log('in hanle cancel')
     this.props.toggleVoteForm()
   }
 
@@ -43,8 +45,8 @@ class CreateVoteForm extends Component {
                 <Icon name='file text outline' />
                 Vote
               </Button>
-              <Button basic color='red'>
-                <Icon name='remove' onClick={this.props.handleCancel} />
+              <Button basic color='red' onClick={this.handleCancel}>
+                <Icon name='remove'  />
                 Cancel
               </Button>
             </Button.Group>

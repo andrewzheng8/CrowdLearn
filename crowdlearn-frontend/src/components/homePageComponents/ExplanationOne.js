@@ -5,7 +5,7 @@ const ExplanationOne = () => {
   return (
     <Container textAlign='center'>
       <h2>Find Someone to Teach or Learn From</h2>
-      <Icon name='user' size='massive' color='blue'/>
+      <Icon name='user' size='massive' color='blue' />
     </Container>
   )
 }
