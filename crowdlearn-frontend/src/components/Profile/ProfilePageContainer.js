@@ -12,7 +12,7 @@ class MyProfileContainer extends Component {
 
   render () {
     switch (this.props.profileMenu.activeItem) {
-      case 'my_profile':
+      case 'profile':
         return <MyProfile />
       case 'following':
         return <Following />

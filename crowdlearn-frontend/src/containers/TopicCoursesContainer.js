@@ -51,7 +51,7 @@ class TopicCoursesContainer extends Component {
                 onClick={this.setCourseShowForm}
                 >
                 <Icon name='plus'/>
-                Add Course
+                Teach Course
               </Button>
             </Grid.Row>
           </Grid.Column>

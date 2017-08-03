@@ -37,7 +37,8 @@ exports.signup = function (req, res, next) {
     // If a user with email does NOT exist, create and save user record
     const user = new User({
       email: email,
-      password: password
+      password: password,
+      img_url: 'https://www.atomix.com.au/media/2015/06/atomix_user31.png'
     })
     console.log('creating new user', user)
     user.save(function (err) {

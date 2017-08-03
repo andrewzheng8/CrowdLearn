@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Card} from 'semantic-ui-react'
+import {Card, Image} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -21,16 +21,17 @@ class TopicCard extends Component {
 
     return (
       <Card onClick={this.goToTopic}>
+        <Image src={this.props.topic.img_url} />
         <Card.Content>
           <Card.Header>
             {this.props.topic.name}
           </Card.Header>
-          <Card.Meta>
+          {/* <Card.Meta>
               some stuff
             </Card.Meta>
           <Card.Description>
               More stuff
-            </Card.Description>
+            </Card.Description> */}
         </Card.Content>
 
       </Card>

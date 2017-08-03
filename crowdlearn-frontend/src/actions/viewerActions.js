@@ -10,3 +10,11 @@ export function setViewer (userId) {
       .catch(err => console.log(err))
   }
 }
+
+export function updateUser (userId, userInfo) {
+  return dispatch => {
+    return axios.patch(`${ROOT_URL}/users/${userId}`, userInfo)
+      .then(response => dispatch({type: SET_VIEWER, payload: response.data}))
+      .catch(err => console.log(err))
+  }
+}

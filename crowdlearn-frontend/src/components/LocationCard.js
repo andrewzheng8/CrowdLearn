@@ -19,9 +19,15 @@ class LocationCard extends Component {
       <Segment>
         <Grid>
           <Grid.Row>
-            <Grid.Column width={5}>
+            <Grid.Column width={8}>
               <h4>Address: {this.props.location.address}</h4>
               <h4>Time: {this.props.location.time}</h4>
+              {this.props.course.price === 0 ?
+                <Progress percent={100} success>
+                  FREE!
+                </Progress> :
+                <Progress total={this.props.course.price} value={this.props.location.funding} progress='percent' />
+              }
             </Grid.Column>
             <Grid.Column width={5}>
               <LocationVotingSegment
@@ -31,21 +37,9 @@ class LocationCard extends Component {
                 course={this.props.course}
               />
             </Grid.Column>
-            <Grid.Column width={6}>
+            <Grid.Column width={3}>
               <TeacherApprovalCheck teacherVoted={this.props.location.teacherVoted} />
             </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={16}>
-              {this.props.course.price === 0 ?
-                <Progress percent={100} success>
-                  FREE!
-                </Progress> :
-                <Progress total={this.props.course.price} value={this.props.location.funding} progress='percent' />
-              }
-
-            </Grid.Column>
-
           </Grid.Row>
 
         </Grid>

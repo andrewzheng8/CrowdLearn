@@ -2,14 +2,15 @@ const Topic = require('../models/topic')
 
 //* ********** Create course and return it populated with teacher field **************
 exports.createTopic = (req, res, next) => {
-  const name = req.body.name
+  const name = req.body.name,
+    img_url = req.body.img_url || 'https://cft.vanderbilt.edu/wp-content/uploads/sites/59/brainpuzzle.png'
 
   if (!name) {
     return res.status(422).send({ error: 'You must provide a name'})
   }
 
   // find the current user by id and add ref to them in the new course as the teacher
-  newTopic = new Topic({name})
+  newTopic = new Topic({name, img_url})
     // save the course and then use a query to grab it from the database and populate the teacher field
   newTopic.save((err, savedTopic) => {
     if (err) next(err)

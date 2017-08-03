@@ -1,24 +1,22 @@
 import React, {Component} from 'react'
 import {Form, Input, Button} from 'semantic-ui-react'
-import {addTopic} from '../../actions/topicsActions'
-import {setActiveItem} from '../../actions/topicsMenuActions'
+import {updateUser} from '../../actions/viewerActions'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
-class CreateTopicForm extends Component {
+class UpdateUserForm extends Component {
   state = {
-    name: '',
-    img_url: ''
+    img_url: this.props.viewer.img_url
   }
 
 
   handleFormSubmit = event => {
     event.preventDefault()
-    // console.log(this.props, 'at form submit');
-    // Call action creator to add course
-    this.props.addTopic(this.state)
-    this.props.setActiveItem('all')
+    console.log(this.props);
+    // Call action creator to sign up the user
+    this.props.updateUser(this.props.viewer._id, this.state)
+    this.props.closeModal(event)
   }
 
 
@@ -32,33 +30,34 @@ class CreateTopicForm extends Component {
   render () {
     return (
       <Form onSubmit={this.handleFormSubmit}>
-        <Form.Field>
-          <label>Topic Name</label>
-          <input type='text' name='name' onChange={this.handleChange} value={this.state.name}/>
-        </Form.Field>
-        <Form.Field>
-          <label>Cover Image URL</label>
+        {/* <Form.Field width={4}>
+          <label>username</label>
+          <input name='username' onChange={this.handleChange} value={this.state.username}/>
+        </Form.Field> */}
+
+        <Form.Field width={4}>
+          <label>email</label>
           <input type='text' name='img_url' onChange={this.handleChange} value={this.state.img_url}/>
         </Form.Field>
-        <Form.Field >
+        <Form.Field width={4}>
           <div className='ui center aligned segment'>
-            <Button type='submit'>Create Course</Button>
+            <Button type='submit'>Update User Info</Button>
           </div>
         </Form.Field>
+
       </Form>
     )
   }
 }
 
 const mapStateToProps = state => {
-  return {viewer: state.viewer}
+  return  { viewer: state.viewer }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    addTopic: addTopic,
-    setActiveItem: setActiveItem
+    updateUser: updateUser
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTopicForm)
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserForm)

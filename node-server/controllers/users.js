@@ -10,9 +10,8 @@ exports.fetchUser = function (req, res, next) {
     return res.status(422).send({ error: 'You must provide valid userId'})
   }
 
-  User.findById(userId, 'email topics_following courses_following', (err, user) => {
+  User.findById(userId, 'email topics_following courses_following img_url', (err, user) => {
     if (err) next(err)
-    console.log(user, 'user found')
     user.populate('topics_following courses_following', (err, popUser) => {
       if (err) next(err)
       console.log(err, 'error')
@@ -30,7 +29,7 @@ exports.followTopic = function (req, res, next) {
     return res.status(422).send({ error: 'You must provide valid userId and topicId'})
   }
 
-  User.findById(userId, 'email topics_following courses_following', (err, user) => {
+  User.findById(userId, 'email topics_following courses_following img_url', (err, user) => {
     if (err) next(err)
     user.topics_following.push(topicId)
 
@@ -54,7 +53,7 @@ exports.unfollowTopic = function (req, res, next) {
     return res.status(422).send({ error: 'You must provide valid userId and topicId'})
   }
 
-  User.findById(userId, 'email topics_following courses_following', (err, user) => {
+  User.findById(userId, 'email topics_following courses_following img_url', (err, user) => {
     if (err) next(err)
     console.log(user.topics_following.filter(t => t.toString() !== topicId))
     user.topics_following = user.topics_following.filter(t => t.toString() !== topicId)
@@ -77,7 +76,7 @@ exports.followCourse = function (req, res, next) {
     return res.status(422).send({ error: 'You must provide valid userId and courseId'})
   }
 
-  User.findById(userId, 'email topics_following courses_following', (err, user) => {
+  User.findById(userId, 'email topics_following courses_following img_url', (err, user) => {
     if (err) next(err)
     user.courses_following.push(courseId)
 
@@ -101,7 +100,7 @@ exports.unfollowCourse = function (req, res, next) {
     return res.status(422).send({ error: 'You must provide valid userId and topicId'})
   }
 
-  User.findById(userId, 'email topics_following courses_following', (err, user) => {
+  User.findById(userId, 'email topics_following courses_following img_url', (err, user) => {
     if (err) next(err)
     // console.log(user.courses_following.filter(t => t.toString() !== courseId))
     user.courses_following = user.courses_following.filter(c => c.toString() !== courseId)
@@ -114,4 +113,29 @@ exports.unfollowCourse = function (req, res, next) {
       })
     })
   })
+}
+
+exports.updateUser = function (req, res, next) {
+  const userId = req.params.userId,
+    img_url = req.body.img_url
+
+    if (!userId || !img_url) {
+      return res.status(422).send({ error: 'You must provide valid userId and image urlß'})
+    }
+
+    User.findById(userId, 'email topics_following courses_following img_url', (err, user) => {
+      if (err) next(err)
+      // console.log(user.courses_following.filter(t => t.toString() !== courseId))
+      user.img_url = img_url
+      // console.log(user.topics_following, 'after filter')
+      user.save((err, savedUser) => {
+        if (err) next(err)
+        savedUser.populate('topics_following courses_following', (err, popUser) => {
+          if (err) next(err)
+          res.json(popUser)
+        })
+      })
+    })
+
+
 }

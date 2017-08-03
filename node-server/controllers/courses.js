@@ -9,12 +9,13 @@ exports.createCourse = (req, res, next) => {
     price = req.body.price,
     maximumStudents = req.body.maximumStudents,
     teacherId = req.body.teacher,
-    topicId = req.params.topicId
-  console.log('before validation ======')
+    topicId = req.params.topicId,
+    img_url = req.body.img_url || 'http://img02.deviantart.net/2df7/i/2012/319/5/9/magic_man_by_damiensaelak-d5l15r9.jpg'
+
   if (!title || !curriculum || !teacherId || maximumStudents < 1 || price < 0 || !topicId) {
     return res.status(422).send({ error: 'You must provide title, curriculum, non negative price, and max students and teacher'})
   }
-  console.log('before new course ======')
+
   var newCourse = new Course({
     title,
     curriculum,
@@ -23,7 +24,7 @@ exports.createCourse = (req, res, next) => {
     teacher: teacherId,
     topic: topicId
   })
-  console.log('after new course ======')
+
   newCourse.saveAndPopTeach(res, next)
 }//* **end createCourse
 

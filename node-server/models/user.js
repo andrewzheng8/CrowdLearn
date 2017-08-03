@@ -8,7 +8,8 @@ const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String,
   courses_following: [{ type: Schema.Types.ObjectId, ref: 'course' }],
-  topics_following: [{ type: Schema.Types.ObjectId, ref: 'topic' }]
+  topics_following: [{ type: Schema.Types.ObjectId, ref: 'topic' }],
+  img_url: String
 })
 
 // On Save Hook, encrypt password

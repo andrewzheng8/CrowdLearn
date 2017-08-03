@@ -33,24 +33,14 @@ class TeachingCoursesContainer extends Component {
         <Grid.Row style={{'height': '700px'}}>
 
           <Grid.Column width={5}>
-            <Grid.Row style={{'height': '600px'}}>
+            <Grid.Row style={{'height': '700px'}}>
               <CourseList courses={this.props.courses} />
-            </Grid.Row>
-            <Grid.Row style={{'height': '100px'}}>
-              <Button style={{'height': '100%', 'width': '100%'}}
-                color='blue'
-                onClick={this.setCourseShowForm}
-                >
-                <Icon name='plus'/>
-                Add Course
-              </Button>
             </Grid.Row>
           </Grid.Column>
 
           <Grid.Column width={11}>
             <CourseShow course={this.props.course} />
           </Grid.Column>
-
         </Grid.Row>
 
       </Grid>

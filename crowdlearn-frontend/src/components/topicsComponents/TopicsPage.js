@@ -7,7 +7,7 @@ const TopicsPage = () => {
   return (
     <Grid centered divided>
       <Grid.Row>
-        <Grid.Column width={12}>
+        <Grid.Column width={16}>
           <TopicsMenu />
         </Grid.Column>
       </Grid.Row>

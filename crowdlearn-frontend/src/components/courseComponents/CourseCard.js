@@ -15,7 +15,7 @@ class CourseCard extends Component {
         <Menu.Item>
           <Card centered onClick={this.setCourseShow}>
             <Card.Content>
-              <Image floated='right' size='mini' src='http://img02.deviantart.net/2df7/i/2012/319/5/9/magic_man_by_damiensaelak-d5l15r9.jpg' />
+              {/* <Image floated='right' size='mini' src='http://img02.deviantart.net/2df7/i/2012/319/5/9/magic_man_by_damiensaelak-d5l15r9.jpg' /> */}
               <Card.Header>
                 {this.props.course.title}
               </Card.Header>
@@ -23,7 +23,7 @@ class CourseCard extends Component {
                 {this.props.course.teacher.email}
               </Card.Meta>
               <Card.Description>
-                This will probably be a truncated description or location/rate
+                {/* This will probably be a truncated description or location/rate */}
               </Card.Description>
             </Card.Content>
           </Card>

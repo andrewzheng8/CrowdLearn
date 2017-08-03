@@ -14,11 +14,12 @@ class TopicsMenu extends Component {
       <Menu secondary>
         <Menu.Item name='all' active={this.props.topicsMenu.activeItem === 'all'} onClick={this.handleItemClick} />
         <Menu.Menu position='right'>
-          <Menu.Item>
+          {/* <Menu.Item>
             <Input icon='search' placeholder='Search...' />
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item name='add_topic' active={this.props.topicsMenu.activeItem === 'add_topic'} onClick={this.handleItemClick} >
             <Icon name='plus' />
+            Add Topic
           </Menu.Item>
         </Menu.Menu>
       </Menu>

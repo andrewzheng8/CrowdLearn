@@ -17,6 +17,7 @@ module.exports = function (app) {
   app.post('/api/v1/signin', requireSignin, Authentication.signin)
   app.post('/api/v1/signup', Authentication.signup)
   app.get('/api/v1/users/:userId', UserController.fetchUser)
+  app.patch('/api/v1/users/:userId', UserController.updateUser)
   app.patch('/api/v1/users/:userId/topics/:topicId/follow', UserController.followTopic)
   app.delete('/api/v1/users/:userId/topics/:topicId/unfollow', UserController.unfollowTopic)
   app.patch('/api/v1/users/:userId/courses/:courseId/follow', UserController.followCourse)

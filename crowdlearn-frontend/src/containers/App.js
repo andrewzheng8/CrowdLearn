@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import SignUpForm from '../components/authComponents/SignUpForm'
 import SignOut from '../components/authComponents/SignOut'
 import SignInForm from '../components/authComponents/SignInForm'
@@ -8,7 +8,9 @@ import TopicsPage from '../components/topicsComponents/TopicsPage'
 import CoursePage from '../components/courseComponents/CoursePage'
 import MyProfilePage from '../components/Profile/MyProfilePage'
 import RequireAuth from '../hocs/RequireAuth'
-import NavBar from '../components/Header'
+import NavBar from '../components/NavBar'
+import PageNotFound from '../components/PageNotFound'
+import HomePage from '../components/homePageComponents/HomePage'
 
 class App extends Component {
   render () {
@@ -17,13 +19,17 @@ class App extends Component {
         <Router>
           <div>
             <Route path='/' component={NavBar} />
-            <Route path='/signin' component={SignInForm} />
-            <Route path='/signout' component={SignOut} />
-            <Route path='/signup' component={SignUpForm} />
-            <Route path='/my_profile' component={RequireAuth(MyProfilePage)} />
-            <Route exact path='/topics' component={RequireAuth(TopicsPage)} />
-            <Route path='/topics/:topicId' component={RequireAuth(TopicCoursesContainer)} />
-            <Route path='/courses/:courseId' component={RequireAuth(CoursePage)} />
+            <Switch>
+              <Route exact path='/' component={HomePage} />
+              <Route exact path='/signin' component={SignInForm} />
+              <Route exact path='/signout' component={SignOut} />
+              <Route exact path='/signup' component={SignUpForm} />
+              <Route exact path='/my_profile' component={RequireAuth(MyProfilePage)} />
+              <Route exact path='/topics' component={RequireAuth(TopicsPage)} />
+              <Route exact path='/topics/:topicId' component={RequireAuth(TopicCoursesContainer)} />
+              <Route exact path='/courses/:courseId' component={RequireAuth(CoursePage)} />
+              <Route path='/:anythingelse' component={PageNotFound} />
+            </Switch>
 
           </div>
         </Router>
@@ -33,5 +39,3 @@ class App extends Component {
 }
 
 export default App
-
-{ /* <Route path='/courses' component={RequireAuth(CoursesContainer)} /> */ }

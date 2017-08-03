@@ -8,27 +8,37 @@ class Header extends Component {
     if (this.props.authenticated) {
       // show a link to sign out
       return [
-        <Menu.Item>
-          <Link to='/topics'>Topics</Link>
-        </Menu.Item>,
-        <Menu.Menu position='right'>
-          <Menu.Item>
-            <Link to='/my_profile'>My Profile</Link>
+        <Link to='/topics' key={3}>
+          <Menu.Item >
+            <div>Topics</div>
           </Menu.Item>
-          <Menu.Item>
-            <Link to='/signout'>Sign Out</Link>
-          </Menu.Item>
+        </Link>,
+        <Menu.Menu position='right'key={4}>
+          <Link to='/my_profile'>
+            <Menu.Item >
+              <div>My Profile</div>
+            </Menu.Item>
+          </Link>
+          <Link to='/signout'>
+            <Menu.Item >
+              <div>Sign Out</div>
+            </Menu.Item>
+          </Link>
         </Menu.Menu>
       ]
     } else {
       // show a link to sign in or sign up
       return [
-        <Menu.Item key={1}>
-          <Link to='/signin'>Sign In</Link>
-        </Menu.Item>,
-        <Menu.Item key={2}>
-          <Link to='/signup'>Sign Up</Link>
-        </Menu.Item>
+        <Link to='/signin' key={1}>
+          <Menu.Item >
+            <div>Sign In</div>
+          </Menu.Item>
+        </Link>,
+        <Link to='/signup' key={2}>
+          <Menu.Item >
+            <div>Sign Up</div>
+          </Menu.Item>
+        </Link>
       ]
     }
   }

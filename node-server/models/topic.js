@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 
 // Define our model
 const topicSchema = new Schema({
-  name: {type: String, unique: true}
+  name: {type: String, unique: true},
+  img_url: String
 })
 
 // Create the model class
