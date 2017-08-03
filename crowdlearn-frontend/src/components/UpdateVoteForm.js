@@ -19,7 +19,7 @@ class UpdateVoteForm extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault()
-    console.log('in update submit', this.props.viewerVote)
+    // console.log('in update submit', this.props.viewerVote)
     console.log(this.state)
     this.props.toggleVoteForm()
     this.props.updateVote(this.state)
@@ -27,7 +27,7 @@ class UpdateVoteForm extends Component {
 
   handleCancel = event => {
     event.preventDefault()
-    console.log('in cancel', this.props.viewerVote)
+    // console.log('in cancel', this.props.viewerVote)
     console.log(this.state)
     this.props.toggleVoteForm()
   }

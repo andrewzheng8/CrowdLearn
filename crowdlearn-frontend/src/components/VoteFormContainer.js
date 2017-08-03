@@ -21,12 +21,12 @@ class VoteFormContainer extends Component {
   }
 
   handleCreateVote = vote => {
-    console.log(this.props, 'in handle create vote')
+    // console.log(this.props, 'in handle create vote')
     this.props.voteForLocation(vote, this.props.location._id, this.props.course._id)
   }
 
   handleUpdateVote = vote => {
-    console.log(this.props, 'in handle update vote')
+    // console.log(this.props, 'in handle update vote')
     this.props.updateVote(vote, this.props.location._id, this.props.course._id)
   }
 

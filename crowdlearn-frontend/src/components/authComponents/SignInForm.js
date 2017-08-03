@@ -16,7 +16,7 @@ class SignInForm extends Component {
     router: PropTypes.object
   }
   componentWillUpdate(nextProps) {
-    console.log("updating signin", nextProps, this.context)
+    // console.log("updating signin", nextProps, this.context)
     if (nextProps.authenticated) {
       this.context.router.history.push('/')
     }

@@ -15,7 +15,7 @@ class TeachingCoursesContainer extends Component {
   }
 
   componentWillMount () {
-    console.log('filter thing in teaching courses container', this.props.filter)
+    // console.log('filter thing in teaching courses container', this.props.filter)
     this.props.setCourses(this.props.filter)
     this.props.setCourse({})
   }

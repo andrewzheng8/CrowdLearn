@@ -17,7 +17,7 @@ export default class CourseShow extends Component {
 
   render () {
     if (!this.props.course.form && !!this.props.course.title) {
-      console.log(this.props.course, 'in course show')
+      // console.log(this.props.course, 'in course show')
       const locationList = this.props.course.locations.map(
         l => {
           return <LocationCard key={`loc-${l._id}`} location={l} course={this.props.course} />

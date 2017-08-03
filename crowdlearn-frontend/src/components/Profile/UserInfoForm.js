@@ -13,7 +13,7 @@ class UpdateUserForm extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault()
-    console.log(this.props);
+    // console.log(this.props);
     // Call action creator to sign up the user
     this.props.updateUser(this.props.viewer._id, this.state)
     this.props.closeModal(event)

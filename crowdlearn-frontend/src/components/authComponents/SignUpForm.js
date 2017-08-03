@@ -18,7 +18,7 @@ class SignUpForm extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    console.log("updating signup", nextProps, this.context)
+    // console.log("updating signup", nextProps, this.context)
     if (nextProps.authenticated) {
       this.context.router.history.push('/topics')
     }

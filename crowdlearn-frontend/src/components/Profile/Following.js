@@ -6,11 +6,11 @@ import TopicsFollowingSegment from './TopicsFollowingSegment'
 
 class Following extends Component {
   render () {
-    console.log('render container?')
+    // console.log('render container?')
     const viewerHasLoaded = this.props.viewer
-    console.log('viewer', this.props.viewer)
+    // console.log('viewer', this.props.viewer)
     if (viewerHasLoaded) {
-      console.log('render container')
+      // console.log('render container')
       return (
         <Grid>
           <Grid.Column width={8}>
@@ -24,7 +24,7 @@ class Following extends Component {
         </Grid>
       )
     } else {
-      console.log('render div')
+      // console.log('render div')
       return <div />
     }
   }
