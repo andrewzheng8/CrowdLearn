@@ -24,21 +24,7 @@ class SignInForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    // fetch post to create user
-    // const crowdlearnUrl = 'http://localhost:3000/api/v1'
-    // const myInit = {
-    //   method: 'POST',
-    //   headers: {
-    //     "Accept": "application/json",
-    //     "Content-Type": "application/json"
-    //   },
-    //   body:
-    //     JSON.stringify(this.state)
-    //   ,
-    //   mode: 'cors'
-    // }
-    // fetch(crowdlearnUrl + '/users', myInit)
-    //console.log(JSON.stringify(this.state))
+
     this.props.signinUser(this.state)
   }
 
