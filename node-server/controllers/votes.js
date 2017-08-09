@@ -15,7 +15,8 @@ exports.voteForLocation = (req, res, next) => {
     loc.votes.push(vote)
     course.save((err, savedCourse) => {
       if (err) next(err)
-      findCourseAndRespond('teacher', res, next, courseId)
+      // findCourseAndRespond('teacher', res, next, courseId)
+      Course.findSingleAndPopTeach(courseId, res, next)
     })
   })
 }
@@ -37,7 +38,8 @@ exports.updateVote = (req, res, next) => {
 
     course.save((err, savedCourse) => {
       if (err) next(err)
-      findCourseAndRespond('teacher', res, next, courseId)
+      // findCourseAndRespond('teacher', res, next, courseId)
+      Course.findSingleAndPopTeach(courseId, res, next)
     })
   })
 }
@@ -57,7 +59,8 @@ exports.removeVote = (req, res, next) => {
     console.log('after remove')
     course.save((err, savedCourse) => {
       if (err) next(err)
-      findCourseAndRespond('teacher', res, next, courseId)
+      // findCourseAndRespond('teacher', res, next, courseId)
+      Course.findSingleAndPopTeach(courseId, res, next)
     })
   })
 }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Form, Input, Button, Icon} from 'semantic-ui-react'
-import {voteForLocation, updateVote, removeVote} from '../../../../actions/voteActions'
+import {voteForLocation, updateVote, removeVote} from '../actions/voteActions'
 // import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -30,35 +30,32 @@ class VoteFormContainer extends Component {
     this.props.updateVote(vote, this.props.location._id, this.props.course._id)
   }
 
-  handleDeleteVote = vote => {
-    this.props.removeVote(vote, this.props.location._id, this.props.course._id)
+  handleDeleteVote = () => {
+    this.props.removeVote(this.props.viewerVote, this.props.location._id, this.props.course._id)
   }
 
 
 
 
   render () {
-    console.log('in vote form container', this.props)
-    const viewerVoteCallback = vote => vote.user._id === this.props.viewer._id
-    const viewerVote = this.props.location.votes.find(viewerVoteCallback)
-    console.log(viewerVote, 'viewerVote in vote form container')
-    if (!this.state.showForm && viewerVote) {
+    console.log('in vote form container')
+    if (!this.state.showForm && this.props.viewerVote) {
       return(
         <div>
-          <h4>You contributed: {viewerVote.contribution}</h4>
+          <h4>You contributed: {this.props.viewerVote.contribution}</h4>
           <Button.Group>
             <Button onClick={this.toggleVoteForm} color='blue' basic >
               <Icon name='file text outline' />
               Edit
             </Button>
-            <Button basic color='red' onClick={this.handleDeleteVote.bind(this, viewerVote)} >
+            <Button basic color='red' onClick={this.handleDeleteVote} >
               <Icon name='remove' />
               Remove
             </Button>
           </Button.Group>
         </div>
       )
-    } else if (!this.state.showForm && !viewerVote) {
+    } else if (!this.state.showForm && !this.props.viewerVote) {
       return(
         <div>
           <h4>You have not voted</h4>
@@ -68,7 +65,7 @@ class VoteFormContainer extends Component {
           </Button>
         </div>
       )
-    } else if (this.state.showForm && !viewerVote) {
+    } else if (this.state.showForm && !this.props.viewerVote) {
       return(
         <CreateVoteForm
           toggleVoteForm={this.toggleVoteForm}
@@ -81,7 +78,7 @@ class VoteFormContainer extends Component {
       return (
         <UpdateVoteForm
           toggleVoteForm={this.toggleVoteForm}
-          viewerVote={viewerVote}
+          viewerVote={this.props.viewerVote}
           location={this.props.location}
           updateVote={this.handleUpdateVote}
           course={this.props.course}

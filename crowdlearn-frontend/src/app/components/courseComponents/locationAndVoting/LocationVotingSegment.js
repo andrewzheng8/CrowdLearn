@@ -5,7 +5,7 @@ import VoteFormContainer from './VoteFormContainer'
 import ShowVotersModal from './ShowVotersModal'
 import {Grid, Divider} from 'semantic-ui-react'
 
-const LocationVotingSegment = ({location, viewerIsTeacher, viewerVote, course}) => {
+const LocationVotingSegment = ({location, viewerIsTeacher, course}) => {
   // console.log('in voting segment')
   const funded = location.funding >= course.price
   if (viewerIsTeacher) {
@@ -23,7 +23,7 @@ const LocationVotingSegment = ({location, viewerIsTeacher, viewerVote, course}) 
     )
   } else {
     return (
-      <VoteFormContainer location={location} viewerVote={viewerVote} />
+      <VoteFormContainer location={location} />
     )
   }
 }

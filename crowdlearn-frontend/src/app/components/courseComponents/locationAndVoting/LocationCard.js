@@ -13,8 +13,6 @@ class LocationCard extends Component {
   render () {
     // refactor into two components
     const viewerIsTeacher = this.props.viewer._id === this.props.course.teacher._id
-    const viewerVoteCallback = vote => vote.user === this.props.viewer._id
-    const viewerVote = this.props.location.votes.find(viewerVoteCallback)
     return (
       <Segment>
         <Grid>
@@ -33,7 +31,6 @@ class LocationCard extends Component {
               <LocationVotingSegment
                 location={this.props.location}
                 viewerIsTeacher={viewerIsTeacher}
-                viewerVote={viewerVote}
                 course={this.props.course}
               />
             </Grid.Column>
@@ -52,10 +49,5 @@ class LocationCard extends Component {
 const mapStateToProps = state => {
   return {viewer: state.viewer}
 }
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     setCourse: course => dispatch(setCourse(course))
-//   }
-// }
-//
+
 export default connect(mapStateToProps)(LocationCard)
