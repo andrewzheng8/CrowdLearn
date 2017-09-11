@@ -22,6 +22,7 @@ module.exports = function (app) {
   app.delete('/api/v1/users/:userId/topics/:topicId/unfollow', UserController.unfollowTopic)
   app.patch('/api/v1/users/:userId/courses/:courseId/follow', UserController.followCourse)
   app.delete('/api/v1/users/:userId/courses/:courseId/unfollow', UserController.unfollowCourse)
+  // /// end user controller actions
   app.post('/api/v1/courses', CourseController.fetchCourses)
   app.get('/api/v1/topics', TopicController.fetchTopics)
   app.get('/api/v1/topics/:topicId', TopicController.fetchTopic)
@@ -30,6 +31,7 @@ module.exports = function (app) {
   app.post('/api/v1/topics', TopicController.createTopic)
   // app.post('/api/v1/courses', CourseController.createCourse)
   app.get('/api/v1/courses/:courseId', CourseController.fetchCourse)
+  app.delete('/api/v1/courses/:courseId', CourseController.removeCourse)
   app.post('/api/v1/courses/:courseId/locations', LocationController.addLocation)
   app.post('/api/v1/courses/:courseId/locations/:locationId/approve', LocationController.toggleApproveLocation)
   app.post('/api/v1/courses/:courseId/locations/:locationId/votes', VoteController.voteForLocation)

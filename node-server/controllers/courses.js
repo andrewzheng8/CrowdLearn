@@ -26,6 +26,21 @@ exports.createCourse = (req, res, next) => {
   newCourse.saveAndPopTeach(res, next)
 }//* **end createCourse
 
+exports.removeCourse = (req, res, next) => {
+  const courseId = req.params.courseId
+
+  if (!courseId) {
+    return res.status(422).send({ error: 'You must provide a courseId'})
+  }
+  Course.remove({_id: courseId}, function(err) {
+    if (err) {
+      next(err)
+    } else {
+      res.send({success: 'Course was successfully removed'})
+    }
+  })
+}
+
 //* ***** fetchCourses for use in course master detail view ********
 exports.fetchCourses = (req, res, next) => {
   const filter = req.body

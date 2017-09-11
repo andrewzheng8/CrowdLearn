@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import {Container, Header, Button, Image, Segment, Grid, Icon} from 'semantic-ui-react'
 import CreateCourseForm from './CreateCourseForm'
 import CreateLocationForm from './locationAndVoting/CreateLocationForm'
@@ -8,6 +9,7 @@ import LocationCard from './locationAndVoting/LocationCard'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './CourseShow.css'
+import {removeCourse} from '../../../actions/coursesActions'
 
 
 export class CourseShow extends Component {
@@ -24,7 +26,7 @@ export class CourseShow extends Component {
     console.log('in isViewer', this.props.course.teacher._id, this.props.viewer._id)
     if(this.props.course.teacher._id === this.props.viewer._id) {
       return (
-        <Button color='red' id='delete-course'>
+        <Button color='red' id='delete-course' onClick={this.handleDeleteCourse}>
           <Icon name='trash outline' />
         </Button>
       )
@@ -87,4 +89,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(CourseShow)
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    removeCourse: removeCourse
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CourseShow)
