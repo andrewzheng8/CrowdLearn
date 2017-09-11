@@ -1,18 +1,34 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Container, Header, Button, Image, Segment, Grid} from 'semantic-ui-react'
+import {Container, Header, Button, Image, Segment, Grid, Icon} from 'semantic-ui-react'
 import CreateCourseForm from './CreateCourseForm'
 import CreateLocationForm from './locationAndVoting/CreateLocationForm'
 import FollowCourseContainer from './FollowCourseContainer'
 import LocationCard from './locationAndVoting/LocationCard'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
+import './CourseShow.css'
 
 
-export default class CourseShow extends Component {
+export class CourseShow extends Component {
 
   static contextTypes = {
     router: PropTypes.object
+  }
+
+  handleDeleteCourse = () => {
+    this.props.removeCourse(this.props.course._id)
+  }
+
+  isViewer = () => {
+    console.log('in isViewer', this.props.course.teacher._id, this.props.viewer._id)
+    if(this.props.course.teacher._id === this.props.viewer._id) {
+      return (
+        <Button color='red' id='delete-course'>
+          <Icon name='trash outline' />
+        </Button>
+      )
+    }
   }
 
   render () {
@@ -23,6 +39,7 @@ export default class CourseShow extends Component {
           return <LocationCard key={`loc-${l._id}`} location={l} course={this.props.course} />
         }
       )
+      const curriculum_pararagraphs = this.props.course.curriculum.split('\n').map((p, index) => <p key={`par-${index}`}>{p}</p>)
       return (
         <Container style={{'overflow': 'scroll', 'height': '100%'}}>
           <Grid>
@@ -34,9 +51,11 @@ export default class CourseShow extends Component {
                 <FollowCourseContainer />
                 {this.props.isPage ? null : <Link to={`/courses/${this.props.course._id}`} replace>Go to Full Course Page</Link> }
 
-                <p>Curriculum: {this.props.course.curriculum}</p>
+                <p>Curriculum: </p>
+                {curriculum_pararagraphs}
               </Grid.Column>
               <Grid.Column width={6}>
+                {this.isViewer()}
                 <p>teacher email :{this.props.course.teacher ? this.props.course.teacher.email : null}</p>
                 <Image src={this.props.course.teacher.img_url} size='large'/>
 
@@ -61,3 +80,11 @@ export default class CourseShow extends Component {
     }
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    viewer: state.viewer
+  }
+}
+
+export default connect(mapStateToProps)(CourseShow)

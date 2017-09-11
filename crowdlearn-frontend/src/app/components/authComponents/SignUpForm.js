@@ -10,7 +10,8 @@ class SignUpForm extends Component {
     username: '',
     email: '',
     password: '',
-    password_confirmation: ''
+    password_confirmation: '',
+    //residence: ''
   }
 
   static contextTypes = {
@@ -63,7 +64,10 @@ class SignUpForm extends Component {
             <Button type='submit'>Sign Up</Button>
           </div>
         </Form.Field>
-
+        {/* <Form.Field>
+          <label>residence</label>
+          <input type='text' name='residence' onChange={this.handleChange} value={this.state.residence}/>
+        </Form.Field> */}
       </Form>
     )
   }

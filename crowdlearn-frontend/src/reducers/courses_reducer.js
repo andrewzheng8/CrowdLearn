@@ -1,4 +1,4 @@
-import {SET_COURSES, ADD_COURSE, FETCH_COURSES, REPLACE_COURSE} from '../actions/types'
+import {SET_COURSES, ADD_COURSE, FETCH_COURSES, REPLACE_COURSE, DELETE_COURSE} from '../actions/types'
 
 export const coursesReducer = (state = [], action) => {
   switch (action.type) {
@@ -17,6 +17,12 @@ export const coursesReducer = (state = [], action) => {
       const courseIndex = nextState.findIndex(isCourse)
       nextState[courseIndex] = {...action.payload}
       return nextState
+    case DELETE_COURSE:
+      let nextStateDelete = [...state]
+      const isCourseDelete = el => el._id === action.payload
+      const courseIndexDelete = nextStateDelete.findIndex(isCourseDelete)
+      nextStateDelete.splice(courseIndexDelete , 1)
+      return nextStateDelete
     default:
       return state
   }

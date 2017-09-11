@@ -9,6 +9,7 @@ const userSchema = new Schema({
   password: String,
   courses_following: [{ type: Schema.Types.ObjectId, ref: 'course' }],
   topics_following: [{ type: Schema.Types.ObjectId, ref: 'topic' }],
+  residence: String,
   img_url: String
 })
 

@@ -10,7 +10,6 @@ class CourseForm extends Component {
     title: '',
     curriculum: '',
     price: 0,
-    maximumStudents: 0,
     teacher: this.props.viewer._id,
     topic: this.context.router.route.match.params.topicId
   }
@@ -30,9 +29,16 @@ class CourseForm extends Component {
 
 
   handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+    if (event.target.name === 'price' && event.target.value < 0) {
+      this.setState({
+        price: 0
+      })
+    } else {
+      this.setState({
+        [event.target.name]: event.target.value
+      })
+    }
+
   }
 
   render () {
@@ -50,10 +56,6 @@ class CourseForm extends Component {
         <Form.Field >
           <label>Price in Dollars</label>
           <input type='number' name='price' onChange={this.handleChange} value={this.state.price}/>
-        </Form.Field>
-        <Form.Field >
-          <label>Maximum Number of Students</label>
-          <input type='number' name='maximumStudents' onChange={this.handleChange} value={this.state.maximumStudents}/>
         </Form.Field>
         <Form.Field >
           <div className='ui center aligned segment'>

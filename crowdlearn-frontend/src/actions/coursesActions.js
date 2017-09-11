@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {SET_COURSES, SET_COURSE, ADD_COURSE, FETCH_COURSES, REPLACE_COURSE} from './types'
+import {SET_COURSES, SET_COURSE, ADD_COURSE, FETCH_COURSES, REPLACE_COURSE, DELETE_COURSE} from './types'
 
 const ROOT_URL = 'http://localhost:3000/api/v1'
 
@@ -36,6 +36,27 @@ export const addCourse = course => {
         // - Show an error to the user
         console.log(err)
         console.log('did not add course correctly')
+      })
+  }
+}
+
+export const removeCourse = courseId => {
+  return function (dispatch) {
+    // Submit email/password to the server
+    console.log(courseId, 'deleting course')
+    axios.delete(`${ROOT_URL}/courses/${courseId}`, courseId)
+      .then(response => {
+        // If request is good...
+        // - Update state to show course aådded in list and set show page to that course
+        console.log(response, 'responding to add')
+        dispatch({type: DELETE_COURSE, payload: {_id: courseId}})
+        dispatch({type: SET_COURSE, payload: {} })
+      })
+      .catch(err => {
+        // If request is bad...
+        // - Show an error to the user
+        console.log(err)
+        console.log('did not remove course correctly')
       })
   }
 }

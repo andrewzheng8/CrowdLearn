@@ -19,10 +19,11 @@ exports.signin = function (req, res, next) {
 exports.signup = function (req, res, next) {
   const email = req.body.email
   const password = req.body.password
+  // const residence = req.body.residence
   // const residence = req.body.residence add in nearby residence to where you reside
-
+  // || !residence
   if (!email || !password) {
-    return res.status(422).send({ error: 'You must provide email and password'})
+    return res.status(422).send({ error: 'You must provide email, password, and residence address'})
   }
 
   // See if a user with the given email exists
@@ -38,6 +39,7 @@ exports.signup = function (req, res, next) {
     const user = new User({
       email: email,
       password: password,
+      //residence: residence,
       img_url: 'https://www.atomix.com.au/media/2015/06/atomix_user31.png'
     })
     console.log('creating new user', user)

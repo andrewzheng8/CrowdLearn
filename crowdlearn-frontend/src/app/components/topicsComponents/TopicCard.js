@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {setTopic} from '../../../actions/topicActions'
 import PropTypes from 'prop-types'
+import './TopicCard.css'
 
 class TopicCard extends Component {
 
@@ -21,9 +22,9 @@ class TopicCard extends Component {
 
     return (
       <Card onClick={this.goToTopic}>
-        <Image src={this.props.topic.img_url} size='large' />
-        <Card.Content>
-          <Card.Header>
+        <Image className="topic-thumbnail" src={this.props.topic.img_url} size='large' height='max' />
+        <Card.Content className="topic-title">
+          <Card.Header >
             {this.props.topic.name}
           </Card.Header>
           {/* <Card.Meta>

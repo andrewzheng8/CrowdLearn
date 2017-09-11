@@ -7,6 +7,7 @@ import {setTopic} from '../../../actions/topicActions'
 import TopicsList from './TopicsList'
 import TopicsForm from './CreateTopicForm'
 import TopicsMenu from './TopicsMenu'
+//import './TopicsContainer.css'
 // import CourseShow from '../components/courseComponents/CourseShow'
 import {Grid, Button, Icon} from 'semantic-ui-react'
 
