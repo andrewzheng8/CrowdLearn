@@ -36,7 +36,7 @@ class SignInForm extends Component {
 
   render () {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} className='auth-form'>
         <Form.Field width={4}>
           <label>email</label>
           <input name='email' onChange={this.handleChange} value={this.state.email}/>

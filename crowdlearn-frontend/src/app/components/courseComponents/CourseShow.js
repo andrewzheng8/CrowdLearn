@@ -49,7 +49,6 @@ export class CourseShow extends Component {
               <Grid.Column width={8}>
                 <Header as='h2'>{this.props.course.title}</Header>
                 <p>Price: {this.props.course.price}</p>
-                <p>Maximum Students: {this.props.course.maximumStudents}</p>
                 <FollowCourseContainer />
                 {this.props.isPage ? null : <Link to={`/courses/${this.props.course._id}`} replace>Go to Full Course Page</Link> }
 

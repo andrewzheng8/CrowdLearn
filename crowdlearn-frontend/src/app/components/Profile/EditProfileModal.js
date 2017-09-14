@@ -22,7 +22,7 @@ export default class EditProfileModal extends Component {
         basic
         size='small'
       >
-        <Header icon='browser' content='Cookies policy' />
+        <Header content='User Profile Picture' />
         <Modal.Content>
           <UserInfoForm closeModal={this.handleClose} />
         </Modal.Content>

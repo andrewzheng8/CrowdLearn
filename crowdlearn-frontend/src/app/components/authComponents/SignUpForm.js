@@ -4,6 +4,7 @@ import {signupUser} from '../../../actions/authActions'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import './AuthForm.css'
 
 class SignUpForm extends Component {
   state = {
@@ -42,7 +43,7 @@ class SignUpForm extends Component {
 
   render () {
     return (
-      <Form onSubmit={this.handleFormSubmit}>
+      <Form onSubmit={this.handleFormSubmit} className='auth-form'>
         {/* <Form.Field width={4}>
           <label>username</label>
           <input name='username' onChange={this.handleChange} value={this.state.username}/>
